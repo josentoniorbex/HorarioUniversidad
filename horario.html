@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Horario: DISI, SO, ASEE, GPS, Imagen Digital</title>
+<title>HORARIO INGENIERIA INFORMATICA</title>
 <style>
   :root{
     --hour-bg:#EAEAEA;
@@ -346,8 +346,8 @@
 </head>
 <body>
 
-<h1>HORARIO: DISI, SO, ASEE, GPS, IMAGEN DIGITAL</h1>
-<div class="subtitle">Toca o haz clic sobre una clase para marcarla. Tu selección se guarda automáticamente.</div>
+<h1>HORARIO</h1>
+<div class="subtitle">Haz click izquierdo sobre una clase para marcarla. Click derecho para marcarla como obligatoria. Tu selección se guarda automáticamente.</div>
 
 <div class="toolbar">
   <label class="switch-wrap">
@@ -397,16 +397,17 @@ function idx(t){ return times.indexOf(t); }
 // "lines" here holds only the location/detail text; the subject's own label
 // is prepended automatically when building each cell.
 const SCHEDULE_DATA = {
-  // Orden de días, su etiqueta visible y, para cada uno, el orden (por
-  // sort_name) en que se muestran las columnas de asignaturas ese día.
-  // Todo esto sale del JSON: el colspan de cada día en la cabecera y el
-  // orden de columnas se calculan a partir de "order".length y "order".
+  // Orden de días y su etiqueta visible. Ya no llevan un "order" propio:
+  // para cada día se recorre el array "subject" de abajo en su propio
+  // orden, y se incluye una asignatura en ese día solo si tiene bloques
+  // en subject.horario[day]. Así el colspan y el orden de columnas de
+  // cada día salen directamente de iterar days (key) + subject (JSON).
   "days": [
-    { "key": "lunes",     "label": "LUNES",     "order": ["SO", "ASEE", "ID"] },
-    { "key": "martes",    "label": "MARTES",    "order": ["SO", "GPS", "ID", "ASEE"] },
-    { "key": "miercoles", "label": "MIÉRCOLES", "order": ["DISI", "GPS"] },
-    { "key": "jueves",    "label": "JUEVES",    "order": ["DISI", "SO", "ASEE"] },
-    { "key": "viernes",   "label": "VIERNES",   "order": ["SO"] }
+    { "key": "lunes",     "label": "LUNES" },
+    { "key": "martes",    "label": "MARTES" },
+    { "key": "miercoles", "label": "MIÉRCOLES" },
+    { "key": "jueves",    "label": "JUEVES" },
+    { "key": "viernes",   "label": "VIERNES" }
   ],
   "subject": [
     {
@@ -658,9 +659,6 @@ function makeColorPickable(el, sortName){
 }
 
 function buildColumns(data){
-  const bySubject = {};
-  data.subject.forEach(s => { bySubject[s.sort_name] = s; });
-
   const cols = [];
   const dayEndKeys = new Set();
   const dayHeaders = []; // { label, colspan, isLastDay }
@@ -668,18 +666,26 @@ function buildColumns(data){
   const days = data.days;
   days.forEach((dayInfo, dIdx)=>{
     const day = dayInfo.key;
-    const order = dayInfo.order;
     const prefix = dayPrefix(day);
     const isLastDay = dIdx === days.length - 1;
 
-    order.forEach((sortName, i)=>{
-      const subj = bySubject[sortName];
+    // which subjects show up this day - and in what left-to-right order -
+    // comes straight from iterating data.subject in the order it's
+    // declared in the JSON, keeping only the ones that actually have
+    // blocks scheduled for this particular day.
+    const daySubjects = data.subject.filter(subj => {
+      const blocks = subj.horario[day];
+      return blocks && blocks.length > 0;
+    });
+
+    daySubjects.forEach((subj, i)=>{
+      const sortName = subj.sort_name;
+      const label = sortName;
       // label is derived straight from the JSON's sort_name; the color
       // itself no longer comes from a hardcoded class, see data-subject
       // + applySubjectColor() further down
       const cls = "cell-" + sortName.toLowerCase();
-      const label = sortName;
-      const dayBlocks = (subj && subj.horario[day]) ? subj.horario[day] : [];
+      const dayBlocks = subj.horario[day];
       const key = prefix + "-" + sortName.toLowerCase();
       cols.push({
         key,
@@ -691,16 +697,17 @@ function buildColumns(data){
           lines: [label, ...b.lines],
         })),
       });
-      if(i === order.length - 1 && !isLastDay){
+      if(i === daySubjects.length - 1 && !isLastDay){
         dayEndKeys.add(key);
       }
     });
 
-    // colspan for this day's header cell comes straight from the length
-    // of its "order" array in the JSON - no hardcoded numbers anywhere.
+    // colspan for this day's header cell comes straight from how many
+    // subjects were found to have blocks that day - no hardcoded numbers
+    // and no separate "order" array to keep in sync.
     dayHeaders.push({
       label: dayInfo.label,
-      colspan: order.length,
+      colspan: daySubjects.length,
       isLastDay,
     });
   });
@@ -718,7 +725,8 @@ columns.forEach(()=>{
 });
 
 // build the day-label header row (LUNES, MARTES, ...) with colspans taken
-// directly from each day's "order".length in the JSON
+// directly from how many subjects had blocks that day (computed in
+// buildColumns by iterating data.subject per day - see there)
 const dayRow = document.getElementById('dayRow');
 DAY_HEADERS.forEach(dh=>{
   const th = document.createElement('th');
@@ -729,7 +737,7 @@ DAY_HEADERS.forEach(dh=>{
 });
 
 // build the subject-label header row from the same column data (keeps it in
-// sync automatically with the JSON's day/order data, no hand-written <th>s)
+// sync automatically with the JSON's days/subject data, no hand-written <th>s)
 const subjectRow = document.getElementById('subjectRow');
 columns.forEach(col=>{
   const th = document.createElement('th');
