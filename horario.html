@@ -253,7 +253,13 @@
     max-width:1300px;
     margin:0 auto 14px;
     display:flex;
-    justify-content:flex-end;
+    justify-content:space-between; /* Cambiado para separar los lados */
+    align-items:center;
+    gap:10px;
+  }
+  .toolbar-right {
+    display:flex;
+    align-items:center;
     gap:10px;
   }
   .toolbar button{
@@ -264,6 +270,7 @@
     font-size:12.5px;
     cursor:pointer;
     color:#333;
+    font-weight: 600;
   }
   .toolbar button:hover{background:#f0f0f0;}
   .status{
@@ -350,14 +357,19 @@
 <div class="subtitle">Haz click izquierdo sobre una clase para marcarla. Click derecho para marcarla como obligatoria. Tu selección se guarda automáticamente.</div>
 
 <div class="toolbar">
-  <label class="switch-wrap">
-    <span class="switch-label">Animación</span>
-    <span class="switch">
-      <input type="checkbox" id="animToggle" checked>
-      <span class="switch-track"><span class="switch-thumb"></span></span>
-    </span>
-  </label>
-  <button id="clearBtn">Borrar selección</button>
+  <!-- Nuevo botón de inicio -->
+  <button id="homeBtn" onclick="window.location.href='landing.html'">⬅ Volver al Inicio</button>
+  
+  <div class="toolbar-right">
+    <label class="switch-wrap">
+      <span class="switch-label">Animación</span>
+      <span class="switch">
+        <input type="checkbox" id="animToggle" checked>
+        <span class="switch-track"><span class="switch-thumb"></span></span>
+      </span>
+    </label>
+    <button id="clearBtn">Borrar selección</button>
+  </div>
 </div>
 
 <div class="wrap">
@@ -877,9 +889,18 @@ document.getElementById('animToggle').addEventListener('change', (e)=>{
 });
 
 document.getElementById('clearBtn').addEventListener('click', ()=>{
+  // Vaciamos ambas variables
   selectedKeys.clear();
+  markedKeys.clear();
+
+  // Actualizamos visualmente la tabla para ambas cosas
   applySelection();
+  applyMarked();
+
+  // Guardamos en la memoria del navegador que ahora están vacías
   saveSelection();
+  saveMarked();
+
   document.getElementById('statusMsg').textContent = 'Sin clases marcadas todavía.';
 });
 
