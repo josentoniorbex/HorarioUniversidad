@@ -185,6 +185,9 @@
 <script src="database.js"></script>
 
 <script>
+const URL_REPO = 'https://raw.githubusercontent.com/josentoniorbex/HorarioUniversidad/refs/heads/main/database.json';
+
+
 // --- Variables Globales ---
 let DATABASE = {};
 
@@ -222,10 +225,9 @@ const refs = {
 
 // --- Carga del JSON externo ---
 async function loadDatabase() {
-    const url = 'https://raw.githubusercontent.com/joseantoniorbieshna/HorarioUniversidad/refs/heads/main/database.json';
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(URL_REPO);
         
         if (!response.ok) {
             throw new Error('No se pudo cargar la base de datos');
@@ -239,7 +241,7 @@ async function loadDatabase() {
 
     } catch (error) {
         console.error("Error:", error);
-        refs.foldersContainer.innerHTML = '<div class="empty-state" style="color: red;">Error: No se pudo cargar el archivo database.json.</div>';
+        refs.foldersContainer.innerHTML = '<div class="empty-state" style="color: red;">Error: No se pudo cargar el archivo database.json recarga la página.</div>';
     }
 }
 

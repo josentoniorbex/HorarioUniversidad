@@ -285,7 +285,7 @@
         "segundo_semestre": []
     },
     "ingenieria_computadores": {
-        "primer_semestre": [], // Vacío por ahora
+        "primer_semestre": [],
         "segundo_semestre": []
     }
 }
