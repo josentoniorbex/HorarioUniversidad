@@ -617,47 +617,63 @@ function buildColumns(data){
     const prefix = dayPrefix(day);
     const isLastDay = dIdx === days.length - 1;
 
-    // which subjects show up this day - and in what left-to-right order -
-    // comes straight from iterating data.subject in the order it's
-    // declared in the JSON, keeping only the ones that actually have
-    // blocks scheduled for this particular day.
+    // Filtramos las asignaturas que tienen clase este día
     const daySubjects = data.subject.filter(subj => {
       const blocks = subj.horario[day];
       return blocks && blocks.length > 0;
     });
 
-    daySubjects.forEach((subj, i)=>{
-      const sortName = subj.sort_name;
-      const label = sortName;
-      // label is derived straight from the JSON's sort_name; the color
-      // itself no longer comes from a hardcoded class, see data-subject
-      // + applySubjectColor() further down
-      const cls = "cell-" + sortName.toLowerCase();
-      const dayBlocks = subj.horario[day];
-      const key = prefix + "-" + sortName.toLowerCase();
+    // --- CORRECCIÓN: Si el día está completamente vacío ---
+    if (daySubjects.length === 0) {
+      const key = prefix + "-vacio";
       cols.push({
-        key,
-        cls,
-        label,
-        blocks: dayBlocks.map(b => ({
-          start: b.start,
-          span: b.halfHourSlots,
-          lines: [label, ...b.lines],
-        })),
+        key: key,
+        cls: "cell-empty", // Clase genérica sin color
+        label: "-",        // Ponemos un guioncito o lo dejamos en blanco
+        blocks: [],
       });
-      if(i === daySubjects.length - 1 && !isLastDay){
+      
+      if (!isLastDay) {
         dayEndKeys.add(key);
       }
-    });
+      
+      dayHeaders.push({
+        label: dayInfo.label,
+        colspan: 1, // Le damos al menos 1 de ancho para que no colapse
+        isLastDay,
+      });
+    } 
+    // --- Lógica original si el día SÍ tiene clases ---
+    else {
+      daySubjects.forEach((subj, i)=>{
+        const sortName = subj.sort_name;
+        const label = sortName;
+        const cls = "cell-" + sortName.toLowerCase();
+        const dayBlocks = subj.horario[day];
+        const key = prefix + "-" + sortName.toLowerCase();
+        
+        cols.push({
+          key,
+          cls,
+          label,
+          blocks: dayBlocks.map(b => ({
+            start: b.start,
+            span: b.halfHourSlots,
+            lines: [label, ...b.lines],
+          })),
+        });
+        
+        if(i === daySubjects.length - 1 && !isLastDay){
+          dayEndKeys.add(key);
+        }
+      });
 
-    // colspan for this day's header cell comes straight from how many
-    // subjects were found to have blocks that day - no hardcoded numbers
-    // and no separate "order" array to keep in sync.
-    dayHeaders.push({
-      label: dayInfo.label,
-      colspan: daySubjects.length,
-      isLastDay,
-    });
+      dayHeaders.push({
+        label: dayInfo.label,
+        colspan: daySubjects.length,
+        isLastDay,
+      });
+    }
   });
 
   return { cols, dayEndKeys, dayHeaders };
