@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horario: DISI, SO, ASEE, GPS, Imagen Digital</title>
+<style>
+  :root{
+    --so-bg:#00BCD4;      --so-glow:#00BCD4;
+    --asee-bg:#8E44AD;    --asee-glow:#8E44AD;
+    --id-bg:#27AE60;      --id-glow:#27AE60;
+    --disi-bg:#E6A800;    --disi-glow:#E6A800;
+    --gps-bg:#E9BDBB;     --gps-glow:#C0392B;
+    --hour-bg:#EAEAEA;
+    --border:#8c8c8c;
+    --page-bg:#f3f4f6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--page-bg);
+    padding:24px 12px 60px;
+    color:#1a1a1a;
+  }
+  h1{
+    text-align:center;
+    font-size:20px;
+    letter-spacing:.5px;
+    margin:0 0 4px;
+  }
+  .subtitle{
+    text-align:center;
+    color:#666;
+    font-size:13px;
+    margin-bottom:18px;
+  }
+  .wrap{
+    max-width:1300px;
+    margin:0 auto;
+    overflow-x:auto;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,.12);
+    padding:14px;
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:1000px;
+    table-layout:fixed;
+  }
+  th,td{
+    border:1px solid var(--border);
+    text-align:center;
+    font-size:12.5px;
+    padding:2px;
+    vertical-align:middle;
+  }
+  col.hourcol{width:64px;}
+  th.daylabel{
+    font-size:13px;
+    font-weight:700;
+    background:#fff;
+    padding:5px 2px;
+    letter-spacing:.5px;
+  }
+  th.subjectlabel{
+    font-weight:700;
+    padding:5px 2px;
+    font-size:12px;
+  }
+  td.hour{
+    background:var(--hour-bg);
+    font-weight:600;
+    font-size:12px;
+    color:#333;
+  }
+  td.empty{
+    background:#fafafa;
+  }
+  .cell-so{background:var(--so-bg);}
+  .cell-asee{background:var(--asee-bg);}
+  .cell-id{background:var(--id-bg);}
+  .cell-disi{background:var(--disi-bg);}
+  .cell-gps{background:var(--gps-bg);}
+
+  /* class blocks in the grid start out neutral gray; color only appears once selected */
+  td.block.cell-so,
+  td.block.cell-asee,
+  td.block.cell-id,
+  td.block.cell-disi,
+  td.block.cell-gps{
+    background:#d6d6d6;
+  }
+
+  td.block{
+    cursor:pointer;
+    position:relative;
+    font-weight:600;
+    line-height:1.35;
+    padding:6px 4px;
+    transition:filter .25s ease, transform .1s ease, opacity .25s ease;
+  }
+  td.block:hover{
+    filter:brightness(0.94);
+  }
+  td.block:active{
+    transform:scale(0.98);
+  }
+  table.has-selection td.block:not(.selected){
+    filter: grayscale(55%) brightness(0.8);
+    opacity:.55;
+  }
+  table.has-selection td.block:not(.selected):hover{
+    filter: grayscale(35%) brightness(0.88);
+    opacity:.8;
+  }
+  td.block .line1{font-weight:700; font-size:12.5px;}
+  td.block .line2, td.block .line3{font-weight:500; font-size:11px; color:#333;}
+
+  /* neon chasing-light border for selected blocks */
+  td.block{
+    --glow: #888;
+  }
+  td.block.selected{
+    z-index:2;
+    background-image: radial-gradient(ellipse at center, color-mix(in srgb, var(--glow) 55%, white) 0%, transparent 75%);
+    background-blend-mode: screen;
+    animation: glow-pulse 2.4s ease-in-out infinite;
+    box-shadow: inset 0 0 10px color-mix(in srgb, var(--glow) 55%, transparent);
+  }
+  @keyframes glow-pulse{
+    0%, 100%{ filter: brightness(1) saturate(1); }
+    50%{ filter: brightness(1.18) saturate(1.35); }
+  }
+  td.block.cell-so.selected{--glow:var(--so-glow); background-color:var(--so-bg);}
+  td.block.cell-asee.selected{--glow:var(--asee-glow); background-color:var(--asee-bg);}
+  td.block.cell-id.selected{--glow:var(--id-glow); background-color:var(--id-bg);}
+  td.block.cell-disi.selected{--glow:var(--disi-glow); background-color:var(--disi-bg);}
+  td.block.cell-gps.selected{--glow:var(--gps-glow); background-color:var(--gps-bg);}
+
+  svg.neon{
+    position:absolute;
+    inset:-4px;
+    width:calc(100% + 8px);
+    height:calc(100% + 8px);
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  td.block.selected svg.neon{
+    opacity:1;
+  }
+  svg.neon .ambient{
+    fill:none;
+    stroke:var(--glow);
+    stroke-width:2.5;
+    opacity:.45;
+    filter: drop-shadow(0 0 2px var(--glow));
+  }
+  svg.neon .comet{
+    fill:none;
+    stroke:var(--glow);
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke-dasharray:16 84;
+    filter: drop-shadow(0 0 2px var(--glow)) drop-shadow(0 0 6px var(--glow)) drop-shadow(0 0 10px var(--glow));
+    animation: chase 2.4s linear infinite;
+  }
+  @keyframes chase{
+    from{ stroke-dashoffset:0; }
+    to{ stroke-dashoffset:-100; }
+  }
+
+  .legend{
+    max-width:1300px;
+    margin:22px auto 0;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,.12);
+    padding:14px 18px;
+  }
+  .legend table{min-width:0;}
+  .legend td{
+    border:1px solid var(--border);
+    font-size:13px;
+    padding:6px 10px;
+  }
+  .legend td.tag{
+    font-weight:700;
+    width:130px;
+  }
+  .toolbar{
+    max-width:1300px;
+    margin:0 auto 14px;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+  }
+  .toolbar button{
+    border:1px solid var(--border);
+    background:#fff;
+    padding:7px 14px;
+    border-radius:6px;
+    font-size:12.5px;
+    cursor:pointer;
+    color:#333;
+  }
+  .toolbar button:hover{background:#f0f0f0;}
+  .status{
+    font-size:11.5px;
+    color:#888;
+    text-align:center;
+    margin-top:8px;
+  }
+
+  /* right-click marking: black background + white text, combined with selection */
+  td.block.marked{
+    background-color:#000 !important;
+    background-image:none !important;
+  }
+  td.block.marked .line1,
+  td.block.marked .line2,
+  td.block.marked .line3{
+    color:#fff !important;
+  }
+  .day-border-right{
+    border-right:4px solid #000 !important;
+  }
+
+  /* ---- animation on/off slider switch ---- */
+  .switch-wrap{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    color:#444;
+    cursor:pointer;
+    user-select:none;
+  }
+  .switch{ position:relative; display:inline-block; }
+  .switch input{
+    position:absolute;
+    opacity:0;
+    width:100%;
+    height:100%;
+    margin:0;
+    cursor:pointer;
+  }
+  .switch-track{
+    display:block;
+    width:40px;
+    height:22px;
+    background:#c9c9c9;
+    border-radius:999px;
+    position:relative;
+    transition:background .2s ease;
+  }
+  .switch-thumb{
+    position:absolute;
+    top:2px;
+    left:2px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.3);
+    transition:transform .2s ease;
+  }
+  .switch input:checked + .switch-track{
+    background:#4CAF50;
+  }
+  .switch input:checked + .switch-track .switch-thumb{
+    transform:translateX(18px);
+  }
+
+  /* ---- static mode: no animations, no border, solid color instead ---- */
+  table.no-anim td.block.selected{
+    animation:none;
+    filter:brightness(1) saturate(1);
+    box-shadow:none;
+  }
+  table.no-anim svg.neon{
+    display:none;
+  }
+</style>
+</head>
+<body>
+
+<h1>HORARIO: DISI, SO, ASEE, GPS, IMAGEN DIGITAL</h1>
+<div class="subtitle">Toca o haz clic sobre una clase para marcarla. Tu selección se guarda automáticamente.</div>
+
+<div class="toolbar">
+  <label class="switch-wrap">
+    <span class="switch-label">Animación</span>
+    <span class="switch">
+      <input type="checkbox" id="animToggle" checked>
+      <span class="switch-track"><span class="switch-thumb"></span></span>
+    </span>
+  </label>
+  <button id="clearBtn">Borrar selección</button>
+</div>
+
+<div class="wrap">
+  <table id="schedule">
+    <colgroup>
+      <col class="hourcol">
+      <col><col><col>
+      <col><col><col>
+      <col><col>
+      <col><col><col>
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th class="daylabel day-border-right" colspan="3">LUNES</th>
+        <th class="daylabel day-border-right" colspan="4">MARTES</th>
+        <th class="daylabel day-border-right" colspan="2">MIÉRCOLES</th>
+        <th class="daylabel day-border-right" colspan="3">JUEVES</th>
+        <th class="daylabel">VIERNES</th>
+      </tr>
+      <tr>
+        <th>HORA</th>
+        <th class="subjectlabel cell-so">SO</th>
+        <th class="subjectlabel cell-asee">ASEE</th>
+        <th class="subjectlabel cell-id day-border-right">ID</th>
+        <th class="subjectlabel cell-so">SO</th>
+        <th class="subjectlabel cell-gps">GPS</th>
+        <th class="subjectlabel cell-id">ID</th>
+        <th class="subjectlabel cell-asee day-border-right">ASEE</th>
+        <th class="subjectlabel cell-disi">DISI</th>
+        <th class="subjectlabel cell-gps day-border-right">GPS</th>
+        <th class="subjectlabel cell-disi">DISI</th>
+        <th class="subjectlabel cell-so">SO</th>
+        <th class="subjectlabel cell-asee day-border-right">ASEE</th>
+        <th class="subjectlabel cell-so">SO</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="legend">
+  <table>
+    <tr><td class="tag cell-disi">DISI</td><td>Diseño e Interacción de Sistemas de Información</td></tr>
+    <tr><td class="tag cell-so">SO</td><td>Sistemas Operativos</td></tr>
+    <tr><td class="tag cell-asee">ASEE</td><td>ASEE (Semestre 7)</td></tr>
+    <tr><td class="tag cell-gps">GPS</td><td>Gestión de Proyectos Software (Semestre 7)</td></tr>
+    <tr><td class="tag cell-id">IMG DIGITAL</td><td>Imagen Digital (Semestre 7)</td></tr>
+  </table>
+</div>
+
+<div class="status" id="statusMsg">Cargando selección guardada...</div>
+
+<script>
+// ---- time axis (30 min slots, 8:30 -> 21:30, lunch break 14:00-15:30 hidden as in original sheet) ----
+const times = [
+  "8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00",     "14:30","15:00", 
+  "15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00"
+];
+
+function idx(t){ return times.indexOf(t); }
+
+// columns: order matches the 12 subject columns (hour column excluded)
+// each column: {subject class, blocks:[{start,span,lines}]}
+const columns = [
+  { key:"lun-so",   cls:"cell-so",   blocks:[
+      {start:"11:30", span:3, lines:["SO","gg IS"]},
+      {start:"13:00", span:3, lines:["SO","gg IC"]},
+  ]},
+  { key:"lun-asee",  cls:"cell-asee", blocks:[
+      {start:"15:30", span:4, lines:["ASEE","sala NOVELL","lab-1"]},
+      {start:"17:30", span:4, lines:["ASEE","sala NOVELL","lab-2"]},
+  ]},
+  { key:"lun-id",    cls:"cell-id", blocks:[
+      {start:"19:30", span:4, lines:["IMG DIGITAL","aula I-1","--- común ---"]},
+  ]},
+  { key:"mar-so",    cls:"cell-so", blocks:[
+      {start:"10:00", span:3, lines:["SO","gg* IC"]},
+      {start:"11:30", span:3, lines:["SO","gg* IS"]},
+  ]},
+  { key:"mar-gps",   cls:"cell-gps", blocks:[
+      {start:"15:30", span:4, lines:["GESTIÓN PROY. SOFT.","aula I-1","-- común --"]},
+  ]},
+  { key:"mar-id",    cls:"cell-id", blocks:[
+      {start:"11:30", span:4, lines:["IMG DIGITAL","lab SD+BETA","lab-2"]},
+      {start:"19:30", span:4, lines:["IMG DIGITAL","lab SD+BETA","lab-1"]},
+  ]},
+    { key:"mar-asee",  cls:"cell-asee", blocks:[
+      {start:"17:30", span:4, lines:["ASEE","Aula I-1","--común--"]},
+  ]},
+  { key:"mie-disi",  cls:"cell-disi", blocks:[
+      {start:"10:00", span:3, lines:["DISI","gg"]},
+      {start:"11:30", span:3, lines:["DISI","lab L1"]},
+      {start:"13:00", span:3, lines:["DISI","lab L2"]},
+  ]},
+  { key:"mie-gps",   cls:"cell-gps", blocks:[
+      {start:"9:30",  span:4, lines:["GPS","aula NOVELL","lab-3"]},
+      {start:"15:30", span:4, lines:["GPS","sala NOVELL","lab-1"]},
+      {start:"17:30", span:4, lines:["GPS","sala NOVELL","lab-2"]},
+  ]},
+  { key:"jue-disi",  cls:"cell-disi", blocks:[
+      {start:"10:00", span:3, lines:["DISI","gg"]},
+      {start:"11:30", span:3, lines:["DISI","lab L3|5*"]},
+      {start:"13:00", span:3, lines:["DISI","lab L4|6*"]},
+  ]},
+  { key:"jue-so",    cls:"cell-so", blocks:[
+      {start:"11:30", span:3, lines:["SO","lab L1"]},
+      {start:"13:00", span:3, lines:["SO","lab L2"]},
+      {start:"15:30", span:4, lines:["SO","lab L3"]},
+      {start:"17:30", span:4, lines:["SO","lab L4"]},
+  ]},
+  { key:"jue-asee",  cls:"cell-asee", blocks:[
+      {start:"11:30", span:4, lines:["ASEE","aula I-1","lab-3"]},
+  ]},
+  { key:"vie-so",    cls:"cell-so", blocks:[
+      {start:"11:30", span:3, lines:["SO","lab L5"]},
+      {start:"13:00", span:3, lines:["SO","lab L6"]},
+  ]},
+];
+
+// last column of each day (LUNES, MARTES, MIÉRCOLES, JUEVES) gets a thick black
+// right border to visually separate the days; VIERNES is last so no divider needed
+const DAY_END_KEYS = new Set(["lun-id", "mar-asee", "mie-gps", "jue-asee"]);
+
+// build per-column per-row map: 'covered' | block-object | null(empty)
+const grid = columns.map(col=>{
+  const rows = new Array(times.length).fill(null);
+  col.blocks.forEach(b=>{
+    const s = idx(b.start);
+    for(let i=0;i<b.span;i++){
+      rows[s+i] = (i===0) ? {block:b, isStart:true} : {isStart:false};
+    }
+  });
+  return rows;
+});
+
+const tbody = document.getElementById('tbody');
+for(let r=0; r<times.length; r++){
+  const tr = document.createElement('tr');
+  const hourTd = document.createElement('td');
+  hourTd.className='hour';
+  hourTd.textContent = times[r];
+  tr.appendChild(hourTd);
+
+  columns.forEach((col, ci)=>{
+    const cellInfo = grid[ci][r];
+    if(cellInfo && !cellInfo.isStart){
+      return; // covered by rowspan above, skip
+    }
+    const td = document.createElement('td');
+    const isDayEnd = DAY_END_KEYS.has(col.key);
+    if(cellInfo && cellInfo.isStart){
+      const b = cellInfo.block;
+      td.rowSpan = b.span;
+      td.className = 'block ' + col.cls + (isDayEnd ? ' day-border-right' : '');
+      td.dataset.key = col.key + '_' + b.start;
+      const lines = b.lines.map((l,i)=>`<div class="line${i+1}">${l}</div>`).join('');
+      const neonSvg = `<svg class="neon" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <rect class="ambient" x="2" y="2" width="96" height="96" rx="5" ry="5" pathLength="100"></rect>
+          <rect class="comet"   x="2" y="2" width="96" height="96" rx="5" ry="5" pathLength="100"></rect>
+        </svg>`;
+      td.innerHTML = lines + neonSvg;
+      td.addEventListener('click', ()=>toggleSelect(td));
+      td.addEventListener('contextmenu', (e)=>{
+        e.preventDefault();
+        toggleMarkAndSelect(td);
+      });
+    } else {
+      td.className = 'empty' + (isDayEnd ? ' day-border-right' : '');
+    }
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+}
+
+// ---- persistence: works inside artifacts (window.storage) AND as a
+// standalone downloaded HTML file opened directly in a browser (localStorage) ----
+const STORAGE_KEY = 'horario:selected-blocks';
+const MARKED_KEY = 'horario:marked-blocks';
+const ANIM_KEY = 'horario:anim-enabled';
+let selectedKeys = new Set();
+let markedKeys = new Set();
+let animEnabled = true;
+
+const storageAvailable = (typeof window !== 'undefined') && !!window.storage;
+
+async function storageGet(key){
+  if(storageAvailable){
+    try{
+      const res = await window.storage.get(key, false);
+      return res ? res.value : null;
+    }catch(e){ /* fall through to localStorage */ }
+  }
+  try{
+    return localStorage.getItem(key);
+  }catch(e){
+    return null;
+  }
+}
+
+async function storageSet(key, value){
+  let ok = false;
+  if(storageAvailable){
+    try{
+      const res = await window.storage.set(key, value, false);
+      ok = !!res;
+    }catch(e){ /* fall through to localStorage */ }
+  }
+  try{
+    localStorage.setItem(key, value);
+    ok = true;
+  }catch(e){ /* ignore */ }
+  return ok;
+}
+
+async function loadSelection(){
+  try{
+    const raw = await storageGet(STORAGE_KEY);
+    if(raw){ selectedKeys = new Set(JSON.parse(raw)); }
+  }catch(e){
+    selectedKeys = new Set();
+  }
+  try{
+    const rawMarked = await storageGet(MARKED_KEY);
+    if(rawMarked){ markedKeys = new Set(JSON.parse(rawMarked)); }
+  }catch(e){
+    markedKeys = new Set();
+  }
+  try{
+    const rawAnim = await storageGet(ANIM_KEY);
+    if(rawAnim !== null){ animEnabled = rawAnim === 'true'; }
+  }catch(e){ /* keep default */ }
+
+  applySelection();
+  applyMarked();
+  applyAnimState();
+  document.getElementById('statusMsg').textContent =
+    selectedKeys.size ? `${selectedKeys.size} clase(s) marcada(s).` : 'Sin clases marcadas todavía.';
+}
+
+async function saveSelection(){
+  await storageSet(STORAGE_KEY, JSON.stringify(Array.from(selectedKeys)));
+}
+
+async function saveMarked(){
+  await storageSet(MARKED_KEY, JSON.stringify(Array.from(markedKeys)));
+}
+
+async function saveAnimPref(){
+  await storageSet(ANIM_KEY, animEnabled ? 'true' : 'false');
+}
+
+function applySelection(){
+  document.querySelectorAll('td.block').forEach(td=>{
+    if(selectedKeys.has(td.dataset.key)){
+      td.classList.add('selected');
+    }else{
+      td.classList.remove('selected');
+    }
+  });
+  document.getElementById('schedule').classList.toggle('has-selection', selectedKeys.size > 0);
+}
+
+function toggleSelect(td){
+  const key = td.dataset.key;
+  if(selectedKeys.has(key)){
+    selectedKeys.delete(key);
+  }else{
+    selectedKeys.add(key);
+  }
+  if(markedKeys.has(key)){
+    markedKeys.delete(key);
+    applyMarked();
+    saveMarked();
+  }
+  applySelection();
+  saveSelection();
+  document.getElementById('statusMsg').textContent =
+    selectedKeys.size ? `${selectedKeys.size} clase(s) marcada(s).` : 'Sin clases marcadas todavía.';
+}
+
+function applyMarked(){
+  document.querySelectorAll('td.block').forEach(td=>{
+    if(markedKeys.has(td.dataset.key)){
+      td.classList.add('marked');
+    }else{
+      td.classList.remove('marked');
+    }
+  });
+}
+
+function toggleMarkAndSelect(td){
+  const key = td.dataset.key;
+  const active = markedKeys.has(key);
+  if(active){
+    markedKeys.delete(key);
+    selectedKeys.delete(key);
+  }else{
+    markedKeys.add(key);
+    selectedKeys.add(key);
+  }
+  applyMarked();
+  applySelection();
+  saveMarked();
+  saveSelection();
+  document.getElementById('statusMsg').textContent =
+    selectedKeys.size ? `${selectedKeys.size} clase(s) marcada(s).` : 'Sin clases marcadas todavía.';
+}
+
+function applyAnimState(){
+  document.getElementById('schedule').classList.toggle('no-anim', !animEnabled);
+  const toggle = document.getElementById('animToggle');
+  if(toggle) toggle.checked = animEnabled;
+}
+
+document.getElementById('animToggle').addEventListener('change', (e)=>{
+  animEnabled = e.target.checked;
+  applyAnimState();
+  saveAnimPref();
+});
+
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  selectedKeys.clear();
+  applySelection();
+  saveSelection();
+  document.getElementById('statusMsg').textContent = 'Sin clases marcadas todavía.';
+});
+
+loadSelection();
+</script>
+</body>
+</html>
