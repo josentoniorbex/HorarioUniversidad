@@ -20,7 +20,14 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
   
-  body { background-color: var(--bg); color: var(--text-main); padding: 40px 20px; display: flex; justify-content: center; }
+    body { 
+    background-color: var(--bg); 
+    color: var(--text-main); 
+    padding: 40px 20px; 
+    display: flex; 
+    flex-direction: column; /* Apila de arriba a abajo */
+    align-items: center;    /* Centra todo horizontalmente */
+    }
   
   .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
   
@@ -78,9 +85,53 @@
   .btn-primary { background: var(--text-main); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; width: 100%; }
   .btn-primary:hover { background: #000; }
   .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-back {
+    width: 100%;
+    display: block;
+    background: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 14px 16px; /* Un poco más de padding vertical para que se vea mejor */
+    border-radius: 12px; /* Mismo redondeo que las tarjetas */
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .btn-back:hover {
+    background: #F9FAFB;
+    border-color: #D1D5DB;
+    transform: translateY(-1px);
+  }
+
+
+/* Estilos para el Drag & Drop*/
+  .subject-item.draggable {
+    cursor: grab;
+  }
+  .subject-item.draggable:active {
+    cursor: grabbing;
+  }
+  .subject-item.dragging {
+    opacity: 0; /* Oculta la caja original mientras la arrastras para dejar solo el hueco visible */
+  }
+  .subjects-container {
+    /* Añadimos un pequeño margen para que el contenedor no colapse */
+    min-height: 50px; 
+  }
+
 </style>
 </head>
 <body>
+
+<!-- Botón para volver al inicio -->
+<div style="max-width: 1200px; width: 100%; margin-bottom: 5px;">
+  <button class="btn-back" onclick="window.location.href='landing.html'">
+    ⬅ Volver al Inicio
+  </button>
+</div>
 
 <div class="container">
   <!-- Panel Izquierdo: Buscador/Selector (Carpetas) -->
@@ -126,6 +177,7 @@
       <button id="btnGenerar" class="btn-primary" disabled onclick="irAlHorario()">
         Generar Horario
       </button>
+      <span class="warning-text">* Puedes reordenar las asignaturas arrastrandolas.</span>
     </div>
   </div>
 </div>
@@ -272,7 +324,7 @@ function renderFolders() {
   });
 }
 
-// 2. Renderiza panel derecho (Selección)
+// 2. Renderiza panel derecho (Selección con Drag & Drop en Tiempo Real)
 function renderSelected() {
   refs.selectedList.innerHTML = '';
   refs.countBadge.textContent = currentState.selectedSubjectsMap.size;
@@ -285,8 +337,11 @@ function renderSelected() {
 
   currentState.selectedSubjectsMap.forEach((subj, sortName) => {
     const item = document.createElement('div');
-    item.className = 'subject-item';
+    item.className = 'subject-item draggable';
+    item.draggable = true; 
+    item.dataset.sortname = sortName; 
     item.style.background = '#fff';
+    
     item.innerHTML = `
       <div class="subject-info">
         <span class="subject-name">${subj.name}</span>
@@ -295,10 +350,16 @@ function renderSelected() {
       <button class="btn-remove">Quitar</button>
     `;
 
-    item.querySelector('button').addEventListener('click', () => {
+    item.querySelector('.btn-remove').addEventListener('click', (e) => {
+      e.stopPropagation(); 
       currentState.selectedSubjectsMap.delete(sortName);
       renderViews();
     });
+
+    // --- Nuevos Eventos Drag & Drop ---
+    item.addEventListener('dragstart', handleDragStart);
+    item.addEventListener('drag', handleDrag);
+    item.addEventListener('dragend', handleDragEnd);
 
     refs.selectedList.appendChild(item);
   });
@@ -338,6 +399,128 @@ setupTabs(refs.semestreTabs, 'semestre');
 // --- Navegación Final ---
 function irAlHorario() {
   window.location.href = 'horario.html'; 
+}
+
+// --- Lógica del Drag & Drop ---
+let draggedItem = null;
+// --- Lógica del Drag & Drop en Tiempo Real ---
+
+// El contenedor donde soltamos debe escuchar el evento dragover
+refs.selectedList.addEventListener('dragover', (e) => {
+  e.preventDefault(); // Obligatorio para permitir el Drop
+  
+  const draggingItem = document.querySelector('.dragging');
+  if (!draggingItem) return;
+
+  // Obtenemos el elemento que está justo debajo de nuestro ratón
+  const afterElement = getDragAfterElement(refs.selectedList, e.clientY);
+  
+  // Movemos la caja en tiempo real dentro del HTML
+  if (afterElement == null) {
+    refs.selectedList.appendChild(draggingItem);
+  } else {
+    refs.selectedList.insertBefore(draggingItem, afterElement);
+  }
+});
+
+refs.selectedList.addEventListener('drop', (e) => {
+  e.preventDefault();
+  // Al soltar, guardamos el nuevo orden
+  reorderMapBasedOnDOM();
+});
+
+// --- Variables para el fantasma personalizado ---
+let customGhost = null;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+
+
+function handleDragStart(e) {
+  e.dataTransfer.effectAllowed = 'move';
+  
+  // 1. TRUCO MAGISTRAL: Le damos al navegador una imagen transparente de 1x1 píxel
+  // para ocultar el fantasma semi-transparente nativo.
+  const blankImage = new Image();
+  blankImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+  e.dataTransfer.setDragImage(blankImage, 0, 0);
+
+  // 2. Creamos nuestro propio "fantasma" 100% opaco
+  const rect = this.getBoundingClientRect();
+  dragOffsetX = e.clientX - rect.left;
+  dragOffsetY = e.clientY - rect.top;
+
+  customGhost = this.cloneNode(true);
+  customGhost.style.position = 'fixed';
+  customGhost.style.pointerEvents = 'none'; // Crucial para que el ratón "atraviese" el clon y detecte la lista de abajo
+  customGhost.style.zIndex = '9999';
+  customGhost.style.width = this.offsetWidth + 'px';
+  customGhost.style.background = '#ffffff';
+  customGhost.style.boxShadow = '0 10px 25px -5px rgba(79, 70, 229, 0.4)'; // Sombra flotante
+  customGhost.style.transform = 'scale(1.05)'; // Lo hacemos un pelín más grande al agarrarlo
+  customGhost.style.border = '1px solid var(--primary)';
+  
+  // Posición inicial
+  customGhost.style.left = (e.clientX - dragOffsetX) + 'px';
+  customGhost.style.top = (e.clientY - dragOffsetY) + 'px';
+  
+  document.body.appendChild(customGhost);
+
+  // Ocultamos la caja original para dejar el hueco libre
+  setTimeout(() => {
+    this.classList.add('dragging');
+  }, 0);
+}
+
+// 3. Movemos nuestro clon manualmente siguiendo el cursor
+function handleDrag(e) {
+  // Los navegadores a veces envían (0,0) en el último fotograma del arrastre, esto lo evita
+  if (customGhost && e.clientX !== 0 && e.clientY !== 0) {
+    customGhost.style.left = (e.clientX - dragOffsetX) + 'px';
+    customGhost.style.top = (e.clientY - dragOffsetY) + 'px';
+  }
+}
+
+function handleDragEnd(e) {
+  this.classList.remove('dragging');
+  
+  // Destruimos nuestro fantasma opaco al soltar
+  if (customGhost) {
+    document.body.removeChild(customGhost);
+    customGhost = null;
+  }
+  
+  reorderMapBasedOnDOM();
+}
+// Función matemática para saber dónde colocar la caja
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.subject-item:not(.dragging)')];
+
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    // Calculamos la distancia desde el cursor hasta el centro de la caja
+    const offset = y - box.top - box.height / 2;
+    
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+// Reconstruye tu Map según el nuevo orden visual y actualiza el JSON
+function reorderMapBasedOnDOM() {
+  const newMap = new Map();
+  const items = refs.selectedList.querySelectorAll('.subject-item');
+  
+  items.forEach(item => {
+    const sortName = item.dataset.sortname;
+    const subj = currentState.selectedSubjectsMap.get(sortName);
+    if (subj) newMap.set(sortName, subj);
+  });
+  
+  currentState.selectedSubjectsMap = newMap;
+  updateScheduleData();
 }
 
 // Inicializar
