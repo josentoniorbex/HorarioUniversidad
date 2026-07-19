@@ -128,7 +128,7 @@
 
 <!-- Botón para volver al inicio -->
 <div style="max-width: 1200px; width: 100%; margin-bottom: 5px;">
-  <button class="btn-back" onclick="window.location.href='landing.html'">
+  <button class="btn-back" onclick="window.location.href='index.html'">
     ⬅ Volver al Inicio
   </button>
 </div>
@@ -222,17 +222,25 @@ const refs = {
 
 // --- Carga del JSON externo ---
 async function loadDatabase() {
-  if (typeof MY_DATABASE !== 'undefined') {
-    DATABASE = MY_DATABASE;
-    renderViews();
-  } else {
-    // Si MY_DATABASE no está (porque cambiaste el nombre de la variable en database.js a DATABASE)
-    if (typeof DATABASE !== 'undefined' && Object.keys(DATABASE).length > 0) {
+    const url = 'https://raw.githubusercontent.com/joseantoniorbieshna/HorarioUniversidad/refs/heads/main/database.json';
+
+    try {
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error('No se pudo cargar la base de datos');
+        }
+
+        // Asignamos el JSON obtenido a la variable global DATABASE
+        DATABASE = await response.json();
+        
+        // Ejecutamos renderViews solo cuando tengamos los datos
         renderViews();
-    } else {
-        refs.foldersContainer.innerHTML = '<div class="empty-state" style="color: red;">Error: No se encontró la base de datos (database.js).</div>';
+
+    } catch (error) {
+        console.error("Error:", error);
+        refs.foldersContainer.innerHTML = '<div class="empty-state" style="color: red;">Error: No se pudo cargar el archivo database.json.</div>';
     }
-  }
 }
 
 // --- Lógica Principal ---
