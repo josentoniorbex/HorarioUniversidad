@@ -182,13 +182,13 @@
                             "lunes": [
                                 {
                                     "start": "10:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L1"
                                     ]
                                 },
                                 {
-                                    "start": "12:30",
+                                    "start": "12:00",
                                     "halfHourSlots": 3,
                                     "lines": [
                                         "lab L2"
@@ -213,20 +213,20 @@
                             "miercoles": [
                                 {
                                     "start": "8:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L3"
                                     ]
                                 },
                                 {
-                                    "start": "10:30",
-                                    "halfHourSlots": 4,
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L4"
                                     ]
                                 },
                                 {
-                                    "start": "12:30",
+                                    "start": "11:30",
                                     "halfHourSlots": 3,
                                     "lines": [
                                         "lab L5"
@@ -268,6 +268,20 @@
                                     "lines": [
                                         "lab* L8"
                                     ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
                                 }
                             ],
                             "viernes": []
@@ -281,7 +295,7 @@
                             "martes": [
                                 {
                                     "start": "11:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab** L8"
                                     ]
@@ -290,20 +304,20 @@
                             "miercoles": [
                                 {
                                     "start": "8:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L1"
                                     ]
                                 },
                                 {
-                                    "start": "10:30",
-                                    "halfHourSlots": 4,
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L2"
                                     ]
                                 },
                                 {
-                                    "start": "12:30",
+                                    "start": "11:30",
                                     "halfHourSlots": 3,
                                     "lines": [
                                         "lab L3"
@@ -327,46 +341,30 @@
                             "jueves": [
                                 {
                                     "start": "8:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L4"
                                     ]
                                 },
                                 {
-                                    "start": "10:30",
-                                    "halfHourSlots": 4,
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L5"
                                     ]
                                 },
                                 {
-                                    "start": "12:30",
-                                    "halfHourSlots": 2,
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L6"
                                     ]
                                 },
                                 {
-                                    "start": "13:30",
-                                    "halfHourSlots": 4,
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L7"
-                                    ]
-                                }
-                            ],
-                            "viernes": [
-                                {
-                                    "start": "9:30",
-                                    "halfHourSlots": 4,
-                                    "lines": [
-                                        "lab* L9"
-                                    ]
-                                },
-                                {
-                                    "start": "11:30",
-                                    "halfHourSlots": 4,
-                                    "lines": [
-                                        "lab* L10"
                                     ]
                                 },
                                 {
@@ -383,6 +381,22 @@
                                         "gg B"
                                     ]
                                 }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab* L9"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab* L10"
+                                    ]
+                                },
                             ]
                         }
                     },
@@ -416,7 +430,7 @@
                                 },
                                 {
                                     "start": "11:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L2"
                                     ]
@@ -437,7 +451,7 @@
                                 },
                                 {
                                     "start": "19:30",
-                                    "halfHourSlots": 2,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L3"
                                     ]
@@ -453,9 +467,23 @@
                                 },
                                 {
                                     "start": "11:30",
-                                    "halfHourSlots": 4,
+                                    "halfHourSlots": 3,
                                     "lines": [
                                         "lab L5"
+                                    ]
+                                },
+                                 {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
                                     ]
                                 }
                             ],
@@ -474,20 +502,6 @@
                                         "lab L7"
                                     ]
                                 },
-                                {
-                                    "start": "17:30",
-                                    "halfHourSlots": 2,
-                                    "lines": [
-                                        "gg A"
-                                    ]
-                                },
-                                {
-                                    "start": "18:30",
-                                    "halfHourSlots": 2,
-                                    "lines": [
-                                        "gg B"
-                                    ]
-                                }
                             ],
                             "viernes": []
                         }
