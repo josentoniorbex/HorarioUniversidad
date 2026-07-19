@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selector de Asignaturas Interactivo</title>
+<style>
+  :root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --bg: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --danger: #EF4444;
+    --folder-bg: #F8FAFC;
+    --folder-hover: #F1F5F9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+  
+  body { background-color: var(--bg); color: var(--text-main); padding: 40px 20px; display: flex; justify-content: center; }
+  
+  .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+  
+  @media (max-width: 850px) { .container { grid-template-columns: 1fr; } }
+  
+  .card { background: var(--card-bg); border-radius: 12px; padding: 28px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border); }
+  
+  h2 { font-size: 1.25rem; margin-bottom: 20px; color: var(--text-main); border-bottom: 2px solid var(--border); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+  
+  .badge { background: #EEF2FF; color: var(--primary); padding: 4px 10px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; }
+
+  /* Segmented Controls (Pestañas) */
+  .segment-control { display: flex; background: var(--border); padding: 4px; border-radius: 8px; margin-bottom: 16px; }
+  .segment-btn { flex: 1; padding: 8px 12px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+  .segment-btn.active { background: var(--card-bg); color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .segment-label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; display: block; }
+  
+  .warning-text { font-size: 0.75rem; color: var(--danger); margin-top: 6px; margin-bottom: 24px; display: block; }
+
+  /* Carpetas / Acordeón */
+  .folders-container { display: flex; flex-direction: column; gap: 12px; }
+  .folder { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card-bg); }
+  .folder-header { padding: 16px; background: var(--folder-bg); display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; transition: background 0.2s; font-weight: 600; color: var(--text-main); }
+  .folder-header:hover { background: var(--folder-hover); }
+  
+  /* Icono de Carpeta SVG */
+  .folder-icon { width: 24px; height: 24px; fill: #94A3B8; transition: fill 0.2s; }
+  .folder.open .folder-icon { fill: var(--primary); }
+  .folder-title { flex: 1; }
+  .folder-toggle { transform: rotate(0deg); transition: transform 0.2s; width: 20px; height: 20px; fill: var(--text-muted); }
+  .folder.open .folder-toggle { transform: rotate(180deg); }
+
+  .folder-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: var(--card-bg); }
+  .folder-inner { padding: 16px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--border); }
+
+  /* Listas de asignaturas (Dentro de carpeta y Carrito) */
+  .subject-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s; }
+  .subject-item:hover { border-color: #CBD5E1; }
+  .subject-info { display: flex; flex-direction: column; }
+  .subject-name { font-weight: 600; font-size: 0.9rem; }
+  .subject-sort { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+  
+  /* Botones Add/Remove */
+  .btn-add { background: var(--primary); color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: background 0.2s; }
+  .btn-add:hover { background: var(--primary-hover); }
+  .btn-add:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+  
+  .btn-remove { background: #FEF2F2; color: var(--danger); border: 1px solid #FECACA; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+  .btn-remove:hover { background: var(--danger); color: white; border-color: var(--danger); }
+
+  .empty-state { text-align: center; color: var(--text-muted); padding: 30px 20px; font-size: 0.9rem; background: var(--folder-bg); border-radius: 8px; border: 1px dashed var(--border); }
+
+  /* Acciones Finales */
+  .actions { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); text-align: right; }
+  .btn-primary { background: var(--text-main); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; width: 100%; }
+  .btn-primary:hover { background: #000; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Panel Izquierdo: Buscador/Selector (Carpetas) -->
+  <div class="card">
+    <h2>Catálogo de Asignaturas</h2>
+    
+    <!-- Filtro de Grado -->
+    <span class="segment-label">Grado Universitario</span>
+    <div class="segment-control" id="gradoTabs">
+      <button class="segment-btn active" data-value="ingenieria_software">Ing. Software</button>
+      <button class="segment-btn" data-value="ingenieria_computadores">Ing. Computadores</button>
+    </div>
+
+    <!-- Filtro de Semestre -->
+    <span class="segment-label">Semestre</span>
+    <div class="segment-control" id="semestreTabs">
+      <button class="segment-btn active" data-value="primer_semestre">Primer Semestre</button>
+      <button class="segment-btn" data-value="segundo_semestre">Segundo Semestre</button>
+    </div>
+    
+    <span class="warning-text">* Cambiar de grado o semestre cerrará las carpetas y vaciará tu selección.</span>
+
+    <h3 style="font-size: 1.1rem; margin: 24px 0 16px; color: var(--text-main);">Cursos Disponibles</h3>
+    
+    <!-- Contenedor de Carpetas -->
+    <div id="foldersContainer" class="folders-container">
+      <div class="empty-state">Cargando base de datos...</div>
+    </div>
+  </div>
+
+  <!-- Panel Derecho: Selección actual (Carrito) -->
+  <div class="card" style="position: sticky; top: 40px;">
+    <h2>
+      Tu Selección
+      <span class="badge" id="countBadge">0</span>
+    </h2>
+    
+    <div id="selectedList" class="folders-container" style="min-height: 200px;">
+      <!-- Se llena por JS -->
+    </div>
+
+    <div class="actions">
+      <button id="btnGenerar" class="btn-primary" disabled onclick="irAlHorario()">
+        Generar Horario
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="database.js"></script>
+
+<script>
+// --- Variables Globales ---
+let DATABASE = {};
+
+window.SCHEDULE_DATA = {
+  "days": [
+    { "key": "lunes",     "label": "LUNES" },
+    { "key": "martes",    "label": "MARTES" },
+    { "key": "miercoles", "label": "MIÉRCOLES" },
+    { "key": "jueves",    "label": "JUEVES" },
+    { "key": "viernes",   "label": "VIERNES" }
+  ],
+  "subject": []
+};
+
+let currentState = {
+  grado: 'ingenieria_software',
+  semestre: 'primer_semestre',
+  openFolder: null, // Guarda qué carpeta (curso) está abierta
+  selectedSubjectsMap: new Map()
+};
+
+// SVG Icons
+const SVG_FOLDER = `<svg class="folder-icon" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>`;
+const SVG_CHEVRON = `<svg class="folder-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>`;
+
+// --- Referencias DOM ---
+const refs = {
+  gradoTabs: document.getElementById('gradoTabs'),
+  semestreTabs: document.getElementById('semestreTabs'),
+  foldersContainer: document.getElementById('foldersContainer'),
+  selectedList: document.getElementById('selectedList'),
+  countBadge: document.getElementById('countBadge'),
+  btnGenerar: document.getElementById('btnGenerar')
+};
+
+// --- Carga del JSON externo ---
+async function loadDatabase() {
+  if (typeof MY_DATABASE !== 'undefined') {
+    DATABASE = MY_DATABASE;
+    renderViews();
+  } else {
+    // Si MY_DATABASE no está (porque cambiaste el nombre de la variable en database.js a DATABASE)
+    if (typeof DATABASE !== 'undefined' && Object.keys(DATABASE).length > 0) {
+        renderViews();
+    } else {
+        refs.foldersContainer.innerHTML = '<div class="empty-state" style="color: red;">Error: No se encontró la base de datos (database.js).</div>';
+    }
+  }
+}
+
+// --- Lógica Principal ---
+function renderViews() {
+  renderFolders();
+  renderSelected();
+  updateScheduleData();
+}
+
+// 1. Renderiza las carpetas (Cursos)
+function renderFolders() {
+  refs.foldersContainer.innerHTML = '';
+  const semestreData = DATABASE[currentState.grado]?.[currentState.semestre];
+
+  if (!semestreData || semestreData.length === 0) {
+    refs.foldersContainer.innerHTML = '<div class="empty-state">No hay asignaturas configuradas para este semestre.</div>';
+    return;
+  }
+
+  // Iteramos sobre cada curso del semestre (Ej: 3º Curso, 4º Curso...)
+  semestreData.forEach((cursoObj, index) => {
+    const isFolderOpen = currentState.openFolder === cursoObj.number_curso;
+    const folder = document.createElement('div');
+    folder.className = `folder ${isFolderOpen ? 'open' : ''}`;
+    
+    // Contar cuántas de este curso están seleccionadas
+    let seleccionadasDelCurso = 0;
+    cursoObj.subjects.forEach(s => {
+      if(currentState.selectedSubjectsMap.has(s.sort_name)) seleccionadasDelCurso++;
+    });
+    const badgeHtml = seleccionadasDelCurso > 0 ? `<span class="badge" style="background:#E0E7FF; color:var(--primary); font-size:0.75rem;">${seleccionadasDelCurso} selec.</span>` : '';
+
+    folder.innerHTML = `
+      <div class="folder-header" data-curso="${cursoObj.number_curso}">
+        ${SVG_FOLDER}
+        <div class="folder-title">${cursoObj.name_curso.toUpperCase()}</div>
+        ${badgeHtml}
+        ${SVG_CHEVRON}
+      </div>
+      <div class="folder-content" style="max-height: ${isFolderOpen ? '1000px' : '0'}">
+        <div class="folder-inner" id="inner-${cursoObj.number_curso}">
+          <!-- Asignaturas aquí -->
+        </div>
+      </div>
+    `;
+
+    // Evento para abrir/cerrar carpeta
+    folder.querySelector('.folder-header').addEventListener('click', (e) => {
+      const clickedCurso = parseInt(e.currentTarget.dataset.curso);
+      if (currentState.openFolder === clickedCurso) {
+        currentState.openFolder = null; // Cierra si ya estaba abierta
+      } else {
+        currentState.openFolder = clickedCurso; // Abre la nueva
+      }
+      renderFolders(); // Repinta para animar
+    });
+
+    // Llenar asignaturas dentro de la carpeta
+    const innerContainer = folder.querySelector(`#inner-${cursoObj.number_curso}`);
+    if (cursoObj.subjects.length === 0) {
+        innerContainer.innerHTML = '<div class="empty-state" style="padding:15px;">Carpeta vacía</div>';
+    } else {
+        cursoObj.subjects.forEach(subj => {
+          const isSelected = currentState.selectedSubjectsMap.has(subj.sort_name);
+          const item = document.createElement('div');
+          item.className = 'subject-item';
+          item.innerHTML = `
+            <div class="subject-info">
+              <span class="subject-name">${subj.name}</span>
+              <span class="subject-sort">${subj.sort_name}</span>
+            </div>
+            <button class="btn-add" ${isSelected ? 'disabled' : ''}>
+              ${isSelected ? 'Añadida ✓' : 'Añadir +'}
+            </button>
+          `;
+
+          if (!isSelected) {
+            item.querySelector('button').addEventListener('click', (e) => {
+              e.stopPropagation(); // Evita que se cierre la carpeta
+              currentState.selectedSubjectsMap.set(subj.sort_name, subj);
+              renderViews();
+            });
+          }
+          innerContainer.appendChild(item);
+        });
+    }
+
+    refs.foldersContainer.appendChild(folder);
+  });
+}
+
+// 2. Renderiza panel derecho (Selección)
+function renderSelected() {
+  refs.selectedList.innerHTML = '';
+  refs.countBadge.textContent = currentState.selectedSubjectsMap.size;
+  refs.btnGenerar.disabled = currentState.selectedSubjectsMap.size === 0;
+
+  if (currentState.selectedSubjectsMap.size === 0) {
+    refs.selectedList.innerHTML = '<div class="empty-state" style="border:none; background:transparent;">Tu carrito está vacío.</div>';
+    return;
+  }
+
+  currentState.selectedSubjectsMap.forEach((subj, sortName) => {
+    const item = document.createElement('div');
+    item.className = 'subject-item';
+    item.style.background = '#fff';
+    item.innerHTML = `
+      <div class="subject-info">
+        <span class="subject-name">${subj.name}</span>
+        <span class="subject-sort">${sortName}</span>
+      </div>
+      <button class="btn-remove">Quitar</button>
+    `;
+
+    item.querySelector('button').addEventListener('click', () => {
+      currentState.selectedSubjectsMap.delete(sortName);
+      renderViews();
+    });
+
+    refs.selectedList.appendChild(item);
+  });
+}
+
+// 3. Actualiza variable global y LocalStorage
+function updateScheduleData() {
+  window.SCHEDULE_DATA.subject = Array.from(currentState.selectedSubjectsMap.values());
+  localStorage.setItem('custom_schedule_data', JSON.stringify(window.SCHEDULE_DATA));
+}
+
+// --- Listeners de Pestañas (Segmented Controls) ---
+function setupTabs(container, stateKey) {
+  const buttons = container.querySelectorAll('.segment-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const newValue = e.target.dataset.value;
+      if (currentState[stateKey] !== newValue) {
+        // Limpia UI
+        buttons.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        
+        // Actualiza estado, limpia selección y cierra carpetas
+        currentState[stateKey] = newValue;
+        currentState.selectedSubjectsMap.clear();
+        currentState.openFolder = null; 
+        
+        renderViews();
+      }
+    });
+  });
+}
+
+setupTabs(refs.gradoTabs, 'grado');
+setupTabs(refs.semestreTabs, 'semestre');
+
+// --- Navegación Final ---
+function irAlHorario() {
+  window.location.href = 'horario.html'; 
+}
+
+// Inicializar
+loadDatabase();
+
+</script>
+</body>
+</html>

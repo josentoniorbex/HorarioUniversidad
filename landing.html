@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestor de Horarios Universitarios</title>
+<style>
+  :root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --bg: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+  
+  body { 
+    background-color: var(--bg); 
+    color: var(--text-main); 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: 10px;
+  }
+
+  header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  .container { 
+    max-width: 900px; 
+    width: 100%; 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (max-width: 600px) { 
+    .container { grid-template-columns: 1fr; } 
+  }
+  
+  /* Estilo de los botones gigantes */
+  .choice-btn { 
+    background: var(--card-bg); 
+    border-radius: 16px; 
+    padding: 40px 30px; 
+    border: 2px solid var(--border); 
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .choice-btn:hover:not(.disabled) { 
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.15);
+  }
+
+  .choice-btn.primary {
+    border-color: var(--primary);
+    background: #F8FAFC;
+  }
+
+  .icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Estado Bloqueado (Gris) */
+  .choice-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #E5E7EB;
+    border-color: #D1D5DB;
+  }
+
+  .choice-btn.disabled .icon {
+    filter: grayscale(100%);
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>Gestor de Horarios</h1>
+    <p>¿Qué te gustaría hacer hoy?</p>
+  </header>
+
+  <div class="container">
+    <!-- Botón Izquierda: Crear Nuevo -->
+    <button id="btnNew" class="choice-btn primary">
+      <div class="icon">✨</div>
+      <div class="title">Crear Nuevo Horario</div>
+      <div class="desc">Empieza de cero, selecciona tu grado, curso y elige las asignaturas para configurar un horario nuevo.</div>
+    </button>
+
+    <!-- Botón Derecha: Cargar Guardado -->
+    <button id="btnLoad" class="choice-btn disabled" disabled>
+      <div class="icon">📅</div>
+      <div class="title">Ver Horario Guardado</div>
+      <div class="desc">Continúa donde lo dejaste. Carga el horario con las asignaturas que seleccionaste previamente.</div>
+    </button>
+  </div>
+
+  <script>
+    // Referencias a los botones
+    const btnNew = document.getElementById('btnNew');
+    const btnLoad = document.getElementById('btnLoad');
+
+    // 1. Comprobar si hay datos guardados
+    let hasData = false;
+    const savedData = localStorage.getItem('custom_schedule_data');
+
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        // Comprobamos que el JSON exista y tenga asignaturas dentro del array 'subject'
+        if (parsedData && parsedData.subject && parsedData.subject.length > 0) {
+          hasData = true;
+        }
+      } catch (error) {
+        console.error("Error al leer el localStorage:", error);
+      }
+    }
+
+    // 2. Lógica del botón derecho (Cargar)
+    if (hasData) {
+      // Si hay datos, activamos el botón
+      btnLoad.disabled = false;
+      btnLoad.classList.remove('disabled');
+      
+      btnLoad.addEventListener('click', () => {
+        window.location.href = 'horario.html';
+      });
+    } else {
+      // Si está vacío, le añadimos un tooltip explicando por qué no va
+      btnLoad.title = "No tienes ningún horario guardado actualmente.";
+    }
+
+    // 3. Lógica del botón izquierdo (Crear Nuevo)
+    btnNew.addEventListener('click', () => {
+      // Si quieres asegurarte de que empiece 100% de cero, 
+      // puedes borrar el localStorage anterior descomentando la siguiente línea:
+      // localStorage.removeItem('custom_schedule_data');
+      
+      window.location.href = 'selector.html';
+    });
+  </script>
+
+</body>
+</html>

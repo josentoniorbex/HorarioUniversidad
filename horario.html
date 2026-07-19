@@ -392,121 +392,36 @@ const times = [
 
 function idx(t){ return times.indexOf(t); }
 
-// ---- schedule data, now driven by a subject-based JSON structure ----
-// Each subject lists, per day, its blocks: {start, halfHourSlots, lines}
-// "lines" here holds only the location/detail text; the subject's own label
-// is prepended automatically when building each cell.
-const SCHEDULE_DATA = {
-  // Orden de días y su etiqueta visible. Ya no llevan un "order" propio:
-  // para cada día se recorre el array "subject" de abajo en su propio
-  // orden, y se incluye una asignatura en ese día solo si tiene bloques
-  // en subject.horario[day]. Así el colspan y el orden de columnas de
-  // cada día salen directamente de iterar days (key) + subject (JSON).
-  "days": [
-    { "key": "lunes",     "label": "LUNES" },
-    { "key": "martes",    "label": "MARTES" },
-    { "key": "miercoles", "label": "MIÉRCOLES" },
-    { "key": "jueves",    "label": "JUEVES" },
-    { "key": "viernes",   "label": "VIERNES" }
+
+const savedData = localStorage.getItem('custom_schedule_data');
+
+let SCHEDULE_DATA = {
+  days: [
+    { key: "lunes", label: "LUNES" },
+    { key: "martes", label: "MARTES" },
+    { key: "miercoles", label: "MIÉRCOLES" },
+    { key: "jueves", label: "JUEVES" },
+    { key: "viernes", label: "VIERNES" }
   ],
-  "subject": [
-    {
-      "name": "Sistemas Operativos",
-      "sort_name": "SO",
-      "horario": {
-        "lunes": [
-          { "start": "11:30", "halfHourSlots": 3, "lines": ["gg IS"] },
-          { "start": "13:00", "halfHourSlots": 3, "lines": ["gg IC"] }
-        ],
-        "martes": [
-          { "start": "10:00", "halfHourSlots": 3, "lines": ["gg* IC"] },
-          { "start": "11:30", "halfHourSlots": 3, "lines": ["gg* IS"] }
-        ],
-        "miercoles": [],
-        "jueves": [
-          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L1"] },
-          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L2"] },
-          { "start": "15:30", "halfHourSlots": 4, "lines": ["lab L3"] },
-          { "start": "17:30", "halfHourSlots": 4, "lines": ["lab L4"] }
-        ],
-        "viernes": [
-          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L5"] },
-          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L6"] }
-        ]
-      }
-    },
-    {
-      "name": "ASEE",
-      "sort_name": "ASEE",
-      "horario": {
-        "lunes": [
-          { "start": "15:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-1"] },
-          { "start": "17:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-2"] }
-        ],
-        "martes": [
-          { "start": "17:30", "halfHourSlots": 4, "lines": ["Aula I-1", "--común--"] }
-        ],
-        "miercoles": [],
-        "jueves": [
-          { "start": "11:30", "halfHourSlots": 4, "lines": ["aula I-1", "lab-3"] }
-        ],
-        "viernes": []
-      }
-    },
-    {
-      "name": "Imagen Digital",
-      "sort_name": "ID",
-      "horario": {
-        "lunes": [
-          { "start": "19:30", "halfHourSlots": 4, "lines": ["aula I-1", "--- común ---"] }
-        ],
-        "martes": [
-          { "start": "11:30", "halfHourSlots": 4, "lines": ["lab SD+BETA", "lab-2"] },
-          { "start": "19:30", "halfHourSlots": 4, "lines": ["lab SD+BETA", "lab-1"] }
-        ],
-        "miercoles": [],
-        "jueves": [],
-        "viernes": []
-      }
-    },
-    {
-      "name": "GPS",
-      "sort_name": "GPS",
-      "horario": {
-        "lunes": [],
-        "martes": [
-          { "start": "15:30", "halfHourSlots": 4, "lines": ["aula I-1", "-- común --"] }
-        ],
-        "miercoles": [
-          { "start": "9:30", "halfHourSlots": 4, "lines": ["aula NOVELL", "lab-3"] },
-          { "start": "15:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-1"] },
-          { "start": "17:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-2"] }
-        ],
-        "jueves": [],
-        "viernes": []
-      }
-    },
-    {
-      "name": "DISI",
-      "sort_name": "DISI",
-      "horario": {
-        "lunes": [],
-        "martes": [],
-        "miercoles": [
-          { "start": "10:00", "halfHourSlots": 3, "lines": ["gg"] },
-          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L1"] },
-          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L2"] }
-        ],
-        "jueves": [
-          { "start": "10:00", "halfHourSlots": 3, "lines": ["gg"] },
-          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L3|5*"] },
-          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L4|6*"] }
-        ],
-        "viernes": []
-      }
-    }
-  ]
+  subject: [] // Vacío por defecto
 };
+
+if (savedData) {
+  try {
+    SCHEDULE_DATA = JSON.parse(savedData);
+    console.log("Horario cargado exitosamente desde localStorage");
+  } catch (error) {
+    console.error("Error al leer los datos guardados:", error);
+  }
+} else {
+  // Si no hay datos (alguien entró directo a horario.html sin pasar por el selector)
+  alert("No tienes asignaturas seleccionadas. Redirigiendo al selector...");
+  window.location.href = 'selector.html'; // Lo mandamos de vuelta
+}
+
+// A partir de aquí, el resto de tu código de horario.html funciona normal
+// usando la variable SCHEDULE_DATA que acabamos de cargar.
+// const { cols: columns, dayEndKeys: DAY_END_KEYS... } = buildColumns(SCHEDULE_DATA);
 
 // day full-name -> short key prefix used internally (kept the same as before
 // so previously saved selections still line up). Derived automatically from
