@@ -6,15 +6,14 @@
 <title>Horario: DISI, SO, ASEE, GPS, Imagen Digital</title>
 <style>
   :root{
-    --so-bg:#00BCD4;      --so-glow:#00BCD4;
-    --asee-bg:#8E44AD;    --asee-glow:#8E44AD;
-    --id-bg:#27AE60;      --id-glow:#27AE60;
-    --disi-bg:#E6A800;    --disi-glow:#E6A800;
-    --gps-bg:#E9BDBB;     --gps-glow:#C0392B;
     --hour-bg:#EAEAEA;
     --border:#8c8c8c;
     --page-bg:#f3f4f6;
   }
+  /* Per-subject colors are no longer hardcoded here. Each element that
+     belongs to a subject (legend swatch, header label, grid block) gets
+     --bg and --glow set inline via JS (see applySubjectColor()), and the
+     rules below just consume those custom properties generically. */
   *{box-sizing:border-box;}
   body{
     margin:0;
@@ -82,22 +81,17 @@
   td.empty{
     background:#fafafa;
   }
-  .cell-so{background:var(--so-bg);}
-  .cell-asee{background:var(--asee-bg);}
-  .cell-id{background:var(--id-bg);}
-  .cell-disi{background:var(--disi-bg);}
-  .cell-gps{background:var(--gps-bg);}
-
-  /* class blocks in the grid start out neutral gray; color only appears once selected */
-  td.block.cell-so,
-  td.block.cell-asee,
-  td.block.cell-id,
-  td.block.cell-disi,
-  td.block.cell-gps{
-    background:#d6d6d6;
+  /* th.subjectlabel (column header) and .legend td.tag both carry a
+     data-subject attribute and an inline --bg custom property (set by JS),
+     so a single rule colors both, whatever the subject. */
+  th.subjectlabel[data-subject],
+  .legend td.tag[data-subject]{
+    background:var(--bg);
   }
 
+  /* blocks in the grid start out neutral gray; color only appears once selected */
   td.block{
+    background:#d6d6d6;
     cursor:pointer;
     position:relative;
     font-weight:600;
@@ -126,8 +120,11 @@
   td.block{
     --glow: #888;
   }
+  /* --bg / --glow come from the inline style JS sets on each td.block
+     (see applySubjectColor()), so this single rule covers every subject. */
   td.block.selected{
     z-index:2;
+    background-color:var(--bg, #d6d6d6);
     background-image: radial-gradient(ellipse at center, color-mix(in srgb, var(--glow) 55%, white) 0%, transparent 75%);
     background-blend-mode: screen;
     animation: glow-pulse 2.4s ease-in-out infinite;
@@ -137,11 +134,6 @@
     0%, 100%{ filter: brightness(1) saturate(1); }
     50%{ filter: brightness(1.18) saturate(1.35); }
   }
-  td.block.cell-so.selected{--glow:var(--so-glow); background-color:var(--so-bg);}
-  td.block.cell-asee.selected{--glow:var(--asee-glow); background-color:var(--asee-bg);}
-  td.block.cell-id.selected{--glow:var(--id-glow); background-color:var(--id-bg);}
-  td.block.cell-disi.selected{--glow:var(--disi-glow); background-color:var(--disi-bg);}
-  td.block.cell-gps.selected{--glow:var(--gps-glow); background-color:var(--gps-bg);}
 
   svg.neon{
     position:absolute;
@@ -193,6 +185,69 @@
   .legend td.tag{
     font-weight:700;
     width:130px;
+  }
+  /* both the legend swatch and the column header act as color pickers */
+  .legend td.tag[data-subject],
+  th.subjectlabel[data-subject]{
+    cursor:pointer;
+    transition:filter .15s ease;
+  }
+  .legend td.tag[data-subject]:hover,
+  th.subjectlabel[data-subject]:hover{
+    filter:brightness(1.08);
+  }
+
+  /* self-built color palette popover: doesn't rely on the OS/browser native
+     color dialog (which sandboxed previews can silently block), so picking
+     a color always works. Shared by the legend and the column headers. */
+  .color-popover{
+    position:fixed;
+    z-index:1000;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    box-shadow:0 6px 20px rgba(0,0,0,.22);
+    padding:12px;
+    display:none;
+  }
+  .color-popover.open{ display:block; }
+  .color-popover .swatch-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 26px);
+    gap:7px;
+    margin-bottom:10px;
+  }
+  .color-popover .swatch-btn{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:2px solid #fff;
+    outline:1px solid var(--border);
+    cursor:pointer;
+    padding:0;
+  }
+  .color-popover .swatch-btn:hover{
+    transform:scale(1.1);
+  }
+  .color-popover .swatch-btn.active{
+    outline:2px solid #1a1a1a;
+  }
+  .color-popover .custom-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    color:#444;
+    white-space:nowrap;
+  }
+  .color-popover input[type="color"]{
+    width:34px;
+    height:26px;
+    padding:0;
+    border:1px solid var(--border);
+    border-radius:4px;
+    cursor:pointer;
+    background:none;
   }
   .toolbar{
     max-width:1300px;
@@ -323,13 +378,7 @@
 </div>
 
 <div class="legend">
-  <table>
-    <tr><td class="tag cell-disi">DISI</td><td>Diseño e Interacción de Sistemas de Información</td></tr>
-    <tr><td class="tag cell-so">SO</td><td>Sistemas Operativos</td></tr>
-    <tr><td class="tag cell-asee">ASEE</td><td>ASEE (Semestre 7)</td></tr>
-    <tr><td class="tag cell-gps">GPS</td><td>Gestión de Proyectos Software (Semestre 7)</td></tr>
-    <tr><td class="tag cell-id">IMG DIGITAL</td><td>Imagen Digital (Semestre 7)</td></tr>
-  </table>
+  <table id="legendTable"></table>
 </div>
 
 <div class="status" id="statusMsg">Cargando selección guardada...</div>
@@ -463,6 +512,151 @@ const SCHEDULE_DATA = {
 // each day's "key" in the JSON (first 3 letters), not hardcoded.
 function dayPrefix(dayKey){ return dayKey.slice(0,3); }
 
+// ---------------------------------------------------------------------
+// Per-subject colors: random-but-distinct by default, editable by clicking
+// either the legend swatch or the column header (both reuse the exact same
+// functions below), and persisted so they survive a page reload.
+// ---------------------------------------------------------------------
+const COLORS_KEY = 'horario:subject-colors';
+let subjectColors = {}; // { SORT_NAME: '#rrggbb' }
+
+function hslToHex(h, s, l){
+  s/=100; l/=100;
+  const k = n => (n + h/30) % 12;
+  const a = s * Math.min(l, 1-l);
+  const f = n => l - a*Math.max(-1, Math.min(k(n)-3, Math.min(9-k(n), 1)));
+  const toHex = x => Math.round(255*x).toString(16).padStart(2,'0');
+  return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`;
+}
+
+// spreads default hues using the golden angle so consecutive subjects
+// never land on similar colors, however many subjects the JSON has
+function defaultColorFor(index){
+  const hue = (index * 137.508) % 360;
+  return hslToHex(hue, 62, 55);
+}
+
+// loads saved colors from storage and fills in a random default for any
+// subject that doesn't have one yet (new subject, or first time ever run)
+async function loadSubjectColors(subjectList){
+  let saved = {};
+  try{
+    const raw = await storageGet(COLORS_KEY);
+    if(raw) saved = JSON.parse(raw);
+  }catch(e){ saved = {}; }
+  subjectList.forEach((subj, i)=>{
+    subjectColors[subj.sort_name] = saved[subj.sort_name] || defaultColorFor(i);
+  });
+  await storageSet(COLORS_KEY, JSON.stringify(subjectColors));
+}
+
+// applies a subject's current color to every element tied to it (legend
+// swatch, column header, grid blocks) - they all just carry a
+// data-subject="<SORT_NAME>" attribute, so this works no matter which kind
+// of element it is.
+function applySubjectColor(sortName){
+  const color = subjectColors[sortName];
+  if(!color) return;
+  document.querySelectorAll(`[data-subject="${CSS.escape(sortName)}"]`).forEach(el=>{
+    el.style.setProperty('--bg', color);
+    el.style.setProperty('--glow', color);
+  });
+}
+
+function setSubjectColor(sortName, color){
+  subjectColors[sortName] = color;
+  applySubjectColor(sortName);
+  storageSet(COLORS_KEY, JSON.stringify(subjectColors));
+}
+
+// ---------------------------------------------------------------------
+// Self-built color popover. A palette of preset swatches plus a "custom"
+// color input, rendered as regular page elements (not the OS/browser
+// native color dialog, which sandboxed previews can silently refuse to
+// open). One shared popover, reused for every subject - opened by
+// makeColorPickable() below, called from both the legend and the headers.
+// ---------------------------------------------------------------------
+const PALETTE_COLORS = [
+  '#00BCD4','#8E44AD','#27AE60','#E6A800','#C0392B','#2980B9',
+  '#D35400','#16A085','#E91E63','#3F51B5','#F39C12','#009688',
+  '#795548','#5D4037','#673AB7','#607D8B','#8BC34A','#FF5722'
+];
+
+const colorPopover = document.createElement('div');
+colorPopover.className = 'color-popover';
+colorPopover.innerHTML = `
+  <div class="swatch-grid"></div>
+  <label class="custom-row">Personalizado
+    <input type="color">
+  </label>
+`;
+document.body.appendChild(colorPopover);
+
+const swatchGrid = colorPopover.querySelector('.swatch-grid');
+const customColorInput = colorPopover.querySelector('input[type="color"]');
+PALETTE_COLORS.forEach(color=>{
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'swatch-btn';
+  btn.style.background = color;
+  btn.dataset.color = color;
+  swatchGrid.appendChild(btn);
+});
+
+let popoverSubject = null;
+
+function openColorPopover(sortName, anchorEl){
+  popoverSubject = sortName;
+  const current = (subjectColors[sortName] || '#888888').toLowerCase();
+  swatchGrid.querySelectorAll('.swatch-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.color.toLowerCase() === current);
+  });
+  customColorInput.value = /^#([0-9a-f]{6})$/i.test(current) ? current : '#888888';
+
+  const rect = anchorEl.getBoundingClientRect();
+  colorPopover.classList.add('open'); // show first so its size can be measured
+  const popW = colorPopover.offsetWidth;
+  const left = Math.min(Math.max(8, rect.left), window.innerWidth - popW - 8);
+  const top = Math.min(rect.bottom + 6, window.innerHeight - colorPopover.offsetHeight - 8);
+  colorPopover.style.left = left + 'px';
+  colorPopover.style.top = top + 'px';
+}
+
+function closeColorPopover(){
+  colorPopover.classList.remove('open');
+  popoverSubject = null;
+}
+
+swatchGrid.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.swatch-btn');
+  if(!btn || !popoverSubject) return;
+  setSubjectColor(popoverSubject, btn.dataset.color);
+  closeColorPopover();
+});
+
+customColorInput.addEventListener('input', ()=>{
+  if(popoverSubject) setSubjectColor(popoverSubject, customColorInput.value);
+});
+
+colorPopover.addEventListener('click', (e)=> e.stopPropagation());
+
+document.addEventListener('click', (e)=>{
+  if(colorPopover.classList.contains('open') && !e.target.closest('[data-subject]')){
+    closeColorPopover();
+  }
+});
+
+// makes any element (legend <td class="tag">, header <th>) open the shared
+// color popover for a given subject on click - reused by both call sites
+function makeColorPickable(el, sortName){
+  el.dataset.subject = sortName;
+  el.title = 'Toca para cambiar el color de esta asignatura';
+  el.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    openColorPopover(sortName, el);
+  });
+}
+
 function buildColumns(data){
   const bySubject = {};
   data.subject.forEach(s => { bySubject[s.sort_name] = s; });
@@ -480,8 +674,9 @@ function buildColumns(data){
 
     order.forEach((sortName, i)=>{
       const subj = bySubject[sortName];
-      // class and label are derived straight from the JSON's sort_name,
-      // e.g. sort_name "SO" -> class "cell-so", label "SO"
+      // label is derived straight from the JSON's sort_name; the color
+      // itself no longer comes from a hardcoded class, see data-subject
+      // + applySubjectColor() further down
       const cls = "cell-" + sortName.toLowerCase();
       const label = sortName;
       const dayBlocks = (subj && subj.horario[day]) ? subj.horario[day] : [];
@@ -540,7 +735,24 @@ columns.forEach(col=>{
   const th = document.createElement('th');
   th.className = 'subjectlabel ' + col.cls + (DAY_END_KEYS.has(col.key) ? ' day-border-right' : '');
   th.textContent = col.label;
+  makeColorPickable(th, col.label); // click header -> change this subject's color
   subjectRow.appendChild(th);
+});
+
+// build the legend from the same subject list used everywhere else, so its
+// swatches automatically match whatever subjects exist in the JSON
+const legendTable = document.getElementById('legendTable');
+SCHEDULE_DATA.subject.forEach(subj=>{
+  const tr = document.createElement('tr');
+  const tagTd = document.createElement('td');
+  tagTd.className = 'tag';
+  tagTd.textContent = subj.sort_name;
+  makeColorPickable(tagTd, subj.sort_name); // click legend swatch -> change color too
+  const descTd = document.createElement('td');
+  descTd.textContent = subj.name;
+  tr.appendChild(tagTd);
+  tr.appendChild(descTd);
+  legendTable.appendChild(tr);
 });
 
 // build per-column per-row map: 'covered' | block-object | null(empty)
@@ -575,6 +787,7 @@ for(let r=0; r<times.length; r++){
       td.rowSpan = b.span;
       td.className = 'block ' + col.cls + (isDayEnd ? ' day-border-right' : '');
       td.dataset.key = col.key + '_' + b.start;
+      td.dataset.subject = col.label; // links this block to its subject's color
       const lines = b.lines.map((l,i)=>`<div class="line${i+1}">${l}</div>`).join('');
       const neonSvg = `<svg class="neon" viewBox="0 0 100 100" preserveAspectRatio="none">
           <rect class="ambient" x="2" y="2" width="96" height="96" rx="5" ry="5" pathLength="100"></rect>
@@ -748,6 +961,14 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
 });
 
 loadSelection();
+
+// load saved subject colors (or generate random defaults) and paint every
+// legend swatch / header / block that carries that subject's data-subject
+async function initSubjectColors(){
+  await loadSubjectColors(SCHEDULE_DATA.subject);
+  SCHEDULE_DATA.subject.forEach(s => applySubjectColor(s.sort_name));
+}
+initSubjectColors();
 </script>
 </body>
 </html>
