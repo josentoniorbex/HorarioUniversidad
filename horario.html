@@ -46,9 +46,7 @@
   }
   table{
     border-collapse:collapse;
-    width:100%;
-    min-width:1000px;
-    table-layout:fixed;
+    table-layout:auto;
   }
   th,td{
     border:1px solid var(--border);
@@ -56,6 +54,11 @@
     font-size:12.5px;
     padding:2px;
     vertical-align:middle;
+    white-space:nowrap;
+    min-width:90px;
+  }
+  td.hour, th.hourhead{
+    min-width:64px;
   }
   col.hourcol{width:64px;}
   th.daylabel{
@@ -226,7 +229,7 @@
     color:#fff !important;
   }
   .day-border-right{
-    border-right:4px solid #000 !important;
+    border-right:2px solid #000 !important;
   }
 
   /* ---- animation on/off slider switch ---- */
@@ -314,7 +317,7 @@
     </colgroup>
     <thead>
       <tr>
-        <th></th>
+        <th class="hourhead"></th>
         <th class="daylabel day-border-right" colspan="3">LUNES</th>
         <th class="daylabel day-border-right" colspan="4">MARTES</th>
         <th class="daylabel day-border-right" colspan="2">MIÉRCOLES</th>
@@ -322,7 +325,7 @@
         <th class="daylabel">VIERNES</th>
       </tr>
       <tr>
-        <th>HORA</th>
+        <th class="hourhead">HORA</th>
         <th class="subjectlabel cell-so">SO</th>
         <th class="subjectlabel cell-asee">ASEE</th>
         <th class="subjectlabel cell-id day-border-right">ID</th>
@@ -382,7 +385,7 @@ const columns = [
       {start:"11:30", span:3, lines:["SO","gg* IS"]},
   ]},
   { key:"mar-gps",   cls:"cell-gps", blocks:[
-      {start:"15:30", span:4, lines:["GESTIÓN PROY. SOFT.","aula I-1","-- común --"]},
+      {start:"15:30", span:4, lines:["GPS","aula I-1","-- común --"]},
   ]},
   { key:"mar-id",    cls:"cell-id", blocks:[
       {start:"11:30", span:4, lines:["IMG DIGITAL","lab SD+BETA","lab-2"]},
