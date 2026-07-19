@@ -307,38 +307,15 @@
 
 <div class="wrap">
   <table id="schedule">
-    <colgroup>
+    <colgroup id="colGroup">
       <col class="hourcol">
-      <col><col><col>
-      <col><col><col>
-      <col><col>
-      <col><col><col>
-      <col>
     </colgroup>
     <thead>
-      <tr>
+      <tr id="dayRow">
         <th class="hourhead"></th>
-        <th class="daylabel day-border-right" colspan="3">LUNES</th>
-        <th class="daylabel day-border-right" colspan="4">MARTES</th>
-        <th class="daylabel day-border-right" colspan="2">MIÉRCOLES</th>
-        <th class="daylabel day-border-right" colspan="3">JUEVES</th>
-        <th class="daylabel">VIERNES</th>
       </tr>
-      <tr>
+      <tr id="subjectRow">
         <th class="hourhead">HORA</th>
-        <th class="subjectlabel cell-so">SO</th>
-        <th class="subjectlabel cell-asee">ASEE</th>
-        <th class="subjectlabel cell-id day-border-right">ID</th>
-        <th class="subjectlabel cell-so">SO</th>
-        <th class="subjectlabel cell-gps">GPS</th>
-        <th class="subjectlabel cell-id">ID</th>
-        <th class="subjectlabel cell-asee day-border-right">ASEE</th>
-        <th class="subjectlabel cell-disi">DISI</th>
-        <th class="subjectlabel cell-gps day-border-right">GPS</th>
-        <th class="subjectlabel cell-disi">DISI</th>
-        <th class="subjectlabel cell-so">SO</th>
-        <th class="subjectlabel cell-asee day-border-right">ASEE</th>
-        <th class="subjectlabel cell-so">SO</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -366,67 +343,205 @@ const times = [
 
 function idx(t){ return times.indexOf(t); }
 
-// columns: order matches the 12 subject columns (hour column excluded)
-// each column: {subject class, blocks:[{start,span,lines}]}
-const columns = [
-  { key:"lun-so",   cls:"cell-so",   blocks:[
-      {start:"11:30", span:3, lines:["SO","gg IS"]},
-      {start:"13:00", span:3, lines:["SO","gg IC"]},
-  ]},
-  { key:"lun-asee",  cls:"cell-asee", blocks:[
-      {start:"15:30", span:4, lines:["ASEE","sala NOVELL","lab-1"]},
-      {start:"17:30", span:4, lines:["ASEE","sala NOVELL","lab-2"]},
-  ]},
-  { key:"lun-id",    cls:"cell-id", blocks:[
-      {start:"19:30", span:4, lines:["IMG DIGITAL","aula I-1","--- común ---"]},
-  ]},
-  { key:"mar-so",    cls:"cell-so", blocks:[
-      {start:"10:00", span:3, lines:["SO","gg* IC"]},
-      {start:"11:30", span:3, lines:["SO","gg* IS"]},
-  ]},
-  { key:"mar-gps",   cls:"cell-gps", blocks:[
-      {start:"15:30", span:4, lines:["GPS","aula I-1","-- común --"]},
-  ]},
-  { key:"mar-id",    cls:"cell-id", blocks:[
-      {start:"11:30", span:4, lines:["IMG DIGITAL","lab SD+BETA","lab-2"]},
-      {start:"19:30", span:4, lines:["IMG DIGITAL","lab SD+BETA","lab-1"]},
-  ]},
-    { key:"mar-asee",  cls:"cell-asee", blocks:[
-      {start:"17:30", span:4, lines:["ASEE","Aula I-1","--común--"]},
-  ]},
-  { key:"mie-disi",  cls:"cell-disi", blocks:[
-      {start:"10:00", span:3, lines:["DISI","gg"]},
-      {start:"11:30", span:3, lines:["DISI","lab L1"]},
-      {start:"13:00", span:3, lines:["DISI","lab L2"]},
-  ]},
-  { key:"mie-gps",   cls:"cell-gps", blocks:[
-      {start:"9:30",  span:4, lines:["GPS","aula NOVELL","lab-3"]},
-      {start:"15:30", span:4, lines:["GPS","sala NOVELL","lab-1"]},
-      {start:"17:30", span:4, lines:["GPS","sala NOVELL","lab-2"]},
-  ]},
-  { key:"jue-disi",  cls:"cell-disi", blocks:[
-      {start:"10:00", span:3, lines:["DISI","gg"]},
-      {start:"11:30", span:3, lines:["DISI","lab L3|5*"]},
-      {start:"13:00", span:3, lines:["DISI","lab L4|6*"]},
-  ]},
-  { key:"jue-so",    cls:"cell-so", blocks:[
-      {start:"11:30", span:3, lines:["SO","lab L1"]},
-      {start:"13:00", span:3, lines:["SO","lab L2"]},
-      {start:"15:30", span:4, lines:["SO","lab L3"]},
-      {start:"17:30", span:4, lines:["SO","lab L4"]},
-  ]},
-  { key:"jue-asee",  cls:"cell-asee", blocks:[
-      {start:"11:30", span:4, lines:["ASEE","aula I-1","lab-3"]},
-  ]},
-  { key:"vie-so",    cls:"cell-so", blocks:[
-      {start:"11:30", span:3, lines:["SO","lab L5"]},
-      {start:"13:00", span:3, lines:["SO","lab L6"]},
-  ]},
-];
+// ---- schedule data, now driven by a subject-based JSON structure ----
+// Each subject lists, per day, its blocks: {start, halfHourSlots, lines}
+// "lines" here holds only the location/detail text; the subject's own label
+// is prepended automatically when building each cell.
+const SCHEDULE_DATA = {
+  // Orden de días, su etiqueta visible y, para cada uno, el orden (por
+  // sort_name) en que se muestran las columnas de asignaturas ese día.
+  // Todo esto sale del JSON: el colspan de cada día en la cabecera y el
+  // orden de columnas se calculan a partir de "order".length y "order".
+  "days": [
+    { "key": "lunes",     "label": "LUNES",     "order": ["SO", "ASEE", "ID"] },
+    { "key": "martes",    "label": "MARTES",    "order": ["SO", "GPS", "ID", "ASEE"] },
+    { "key": "miercoles", "label": "MIÉRCOLES", "order": ["DISI", "GPS"] },
+    { "key": "jueves",    "label": "JUEVES",    "order": ["DISI", "SO", "ASEE"] },
+    { "key": "viernes",   "label": "VIERNES",   "order": ["SO"] }
+  ],
+  "subject": [
+    {
+      "name": "Sistemas Operativos",
+      "sort_name": "SO",
+      "horario": {
+        "lunes": [
+          { "start": "11:30", "halfHourSlots": 3, "lines": ["gg IS"] },
+          { "start": "13:00", "halfHourSlots": 3, "lines": ["gg IC"] }
+        ],
+        "martes": [
+          { "start": "10:00", "halfHourSlots": 3, "lines": ["gg* IC"] },
+          { "start": "11:30", "halfHourSlots": 3, "lines": ["gg* IS"] }
+        ],
+        "miercoles": [],
+        "jueves": [
+          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L1"] },
+          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L2"] },
+          { "start": "15:30", "halfHourSlots": 4, "lines": ["lab L3"] },
+          { "start": "17:30", "halfHourSlots": 4, "lines": ["lab L4"] }
+        ],
+        "viernes": [
+          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L5"] },
+          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L6"] }
+        ]
+      }
+    },
+    {
+      "name": "ASEE",
+      "sort_name": "ASEE",
+      "horario": {
+        "lunes": [
+          { "start": "15:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-1"] },
+          { "start": "17:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-2"] }
+        ],
+        "martes": [
+          { "start": "17:30", "halfHourSlots": 4, "lines": ["Aula I-1", "--común--"] }
+        ],
+        "miercoles": [],
+        "jueves": [
+          { "start": "11:30", "halfHourSlots": 4, "lines": ["aula I-1", "lab-3"] }
+        ],
+        "viernes": []
+      }
+    },
+    {
+      "name": "Imagen Digital",
+      "sort_name": "ID",
+      "horario": {
+        "lunes": [
+          { "start": "19:30", "halfHourSlots": 4, "lines": ["aula I-1", "--- común ---"] }
+        ],
+        "martes": [
+          { "start": "11:30", "halfHourSlots": 4, "lines": ["lab SD+BETA", "lab-2"] },
+          { "start": "19:30", "halfHourSlots": 4, "lines": ["lab SD+BETA", "lab-1"] }
+        ],
+        "miercoles": [],
+        "jueves": [],
+        "viernes": []
+      }
+    },
+    {
+      "name": "GPS",
+      "sort_name": "GPS",
+      "horario": {
+        "lunes": [],
+        "martes": [
+          { "start": "15:30", "halfHourSlots": 4, "lines": ["aula I-1", "-- común --"] }
+        ],
+        "miercoles": [
+          { "start": "9:30", "halfHourSlots": 4, "lines": ["aula NOVELL", "lab-3"] },
+          { "start": "15:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-1"] },
+          { "start": "17:30", "halfHourSlots": 4, "lines": ["sala NOVELL", "lab-2"] }
+        ],
+        "jueves": [],
+        "viernes": []
+      }
+    },
+    {
+      "name": "DISI",
+      "sort_name": "DISI",
+      "horario": {
+        "lunes": [],
+        "martes": [],
+        "miercoles": [
+          { "start": "10:00", "halfHourSlots": 3, "lines": ["gg"] },
+          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L1"] },
+          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L2"] }
+        ],
+        "jueves": [
+          { "start": "10:00", "halfHourSlots": 3, "lines": ["gg"] },
+          { "start": "11:30", "halfHourSlots": 3, "lines": ["lab L3|5*"] },
+          { "start": "13:00", "halfHourSlots": 3, "lines": ["lab L4|6*"] }
+        ],
+        "viernes": []
+      }
+    }
+  ]
+};
 
-// last column of each day (LUNES, MARTES, MIÉRCOLES, JUEVES) gets a thick black
-// right border to visually separate the days; VIERNES is last so no divider needed
-const DAY_END_KEYS = new Set(["lun-id", "mar-asee", "mie-gps", "jue-asee"]);
+// day full-name -> short key prefix used internally (kept the same as before
+// so previously saved selections still line up). Derived automatically from
+// each day's "key" in the JSON (first 3 letters), not hardcoded.
+function dayPrefix(dayKey){ return dayKey.slice(0,3); }
+
+function buildColumns(data){
+  const bySubject = {};
+  data.subject.forEach(s => { bySubject[s.sort_name] = s; });
+
+  const cols = [];
+  const dayEndKeys = new Set();
+  const dayHeaders = []; // { label, colspan, isLastDay }
+
+  const days = data.days;
+  days.forEach((dayInfo, dIdx)=>{
+    const day = dayInfo.key;
+    const order = dayInfo.order;
+    const prefix = dayPrefix(day);
+    const isLastDay = dIdx === days.length - 1;
+
+    order.forEach((sortName, i)=>{
+      const subj = bySubject[sortName];
+      // class and label are derived straight from the JSON's sort_name,
+      // e.g. sort_name "SO" -> class "cell-so", label "SO"
+      const cls = "cell-" + sortName.toLowerCase();
+      const label = sortName;
+      const dayBlocks = (subj && subj.horario[day]) ? subj.horario[day] : [];
+      const key = prefix + "-" + sortName.toLowerCase();
+      cols.push({
+        key,
+        cls,
+        label,
+        blocks: dayBlocks.map(b => ({
+          start: b.start,
+          span: b.halfHourSlots,
+          lines: [label, ...b.lines],
+        })),
+      });
+      if(i === order.length - 1 && !isLastDay){
+        dayEndKeys.add(key);
+      }
+    });
+
+    // colspan for this day's header cell comes straight from the length
+    // of its "order" array in the JSON - no hardcoded numbers anywhere.
+    dayHeaders.push({
+      label: dayInfo.label,
+      colspan: order.length,
+      isLastDay,
+    });
+  });
+
+  return { cols, dayEndKeys, dayHeaders };
+}
+
+const { cols: columns, dayEndKeys: DAY_END_KEYS, dayHeaders: DAY_HEADERS } = buildColumns(SCHEDULE_DATA);
+
+// build the colgroup: one <col> per data column, sized from the JSON-derived
+// column list (colgroup already has the leading hourcol in the HTML)
+const colGroup = document.getElementById('colGroup');
+columns.forEach(()=>{
+  colGroup.appendChild(document.createElement('col'));
+});
+
+// build the day-label header row (LUNES, MARTES, ...) with colspans taken
+// directly from each day's "order".length in the JSON
+const dayRow = document.getElementById('dayRow');
+DAY_HEADERS.forEach(dh=>{
+  const th = document.createElement('th');
+  th.className = 'daylabel' + (dh.isLastDay ? '' : ' day-border-right');
+  th.colSpan = dh.colspan;
+  th.textContent = dh.label;
+  dayRow.appendChild(th);
+});
+
+// build the subject-label header row from the same column data (keeps it in
+// sync automatically with the JSON's day/order data, no hand-written <th>s)
+const subjectRow = document.getElementById('subjectRow');
+columns.forEach(col=>{
+  const th = document.createElement('th');
+  th.className = 'subjectlabel ' + col.cls + (DAY_END_KEYS.has(col.key) ? ' day-border-right' : '');
+  th.textContent = col.label;
+  subjectRow.appendChild(th);
+});
 
 // build per-column per-row map: 'covered' | block-object | null(empty)
 const grid = columns.map(col=>{
