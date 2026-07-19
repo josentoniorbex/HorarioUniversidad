@@ -349,6 +349,24 @@
   table.no-anim svg.neon{
     display:none;
   }
+
+  /* ---- Modo "Ajustar al ancho" (Forzado) ---- */
+  table.fit-width-mode {
+    width: 100%;
+    table-layout: fixed; /* Fuerza a las columnas a compartir el espacio disponible */
+  }
+  table.fit-width-mode th, 
+  table.fit-width-mode td {
+    min-width: 0 !important; /* Anula el mínimo de 90px */
+    white-space: normal !important; /* Permite que el texto baje a la siguiente línea */
+    word-break: break-word; /* Rompe palabras largas si es necesario */
+    font-size: 10.5px; /* Letra un poco más pequeña para que quepa mejor */
+    padding: 2px 1px;
+  }
+  table.fit-width-mode td.block .line1 { font-size: 11px; }
+  table.fit-width-mode td.block .line2, 
+  table.fit-width-mode td.block .line3 { font-size: 9.5px; }
+
 </style>
 </head>
 <body>
@@ -370,10 +388,13 @@
     </label>
     <button id="clearBtn">Borrar selección</button>
   </div>
+
+  <!-- Ajustar ancho -->
+  <button id="fitWidthBtn">Restaurar ancho</button>
 </div>
 
 <div class="wrap">
-  <table id="schedule">
+  <table id="schedule" class="fit-width-mode">
     <colgroup id="colGroup">
       <col class="hourcol">
     </colgroup>
@@ -881,6 +902,21 @@ function applyAnimState(){
   const toggle = document.getElementById('animToggle');
   if(toggle) toggle.checked = animEnabled;
 }
+
+// ---- Lógica para alternar el ajuste al ancho ----
+const fitWidthBtn = document.getElementById('fitWidthBtn');
+const scheduleTable = document.getElementById('schedule');
+
+fitWidthBtn.addEventListener('click', () => {
+  scheduleTable.classList.toggle('fit-width-mode');
+  
+  // Cambia el texto del botón dependiendo del estado
+  if (scheduleTable.classList.contains('fit-width-mode')) {
+    fitWidthBtn.textContent = 'Restaurar ancho';
+  } else {
+    fitWidthBtn.textContent = 'Ajustar ancho';
+  }
+});
 
 document.getElementById('animToggle').addEventListener('change', (e)=>{
   animEnabled = e.target.checked;

@@ -2,6 +2,499 @@
     "ingenieria_software": {
         "primer_semestre": [
             {
+                "name_curso": "segundo curso",
+                "number_curso": 2,
+                "subjects": [
+                    {
+                        "name": "Economía Y Empresa",
+                        "sort_name": "EE",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "sem B"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "sem A"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Desarrollo de Programas",
+                        "sort_name": "DP",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L1"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L2"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L6"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L7"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L8"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Bases de Datos",
+                        "sort_name": "BD",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                }
+                            ],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L6"
+                                    ]
+                                },
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L7"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab* L8"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Análisis y Diseño de Algoritmos",
+                        "sort_name": "ADA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab** L8"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                },
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "lab L6"
+                                    ]
+                                },
+                                {
+                                    "start": "13:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L7"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L9"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L10"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Administración y Organización de Computadores",
+                        "sort_name": "AOC",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1|L8*"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L6"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L7"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg A"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "gg B"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    }
+                ]
+            },
+            {
                 "name_curso": "tercer curso",
                 "number_curso": 3,
                 "subjects": [

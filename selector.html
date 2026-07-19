@@ -185,7 +185,7 @@
 <script src="database.js"></script>
 
 <script>
-const URL_REPO = 'https://raw.githubusercontent.com/josentoniorbex/HorarioUniversidad/refs/heads/main/database.json';
+
 
 
 // --- Variables Globales ---
@@ -225,7 +225,9 @@ const refs = {
 
 // --- Carga del JSON externo ---
 async function loadDatabase() {
+  const URL_REPO = 'https://raw.githubusercontent.com/josentoniorbex/HorarioUniversidad/refs/heads/main/database.json';
 
+  /*
     try {
         const response = await fetch(URL_REPO);
         
@@ -242,7 +244,9 @@ async function loadDatabase() {
     } catch (error) {
         console.error("Error:", error);
         refs.foldersContainer.innerHTML = '<div class="empty-state" style="color: red;">Error: No se pudo cargar el archivo database.json recarga la página.</div>';
-    }
+    }*/
+    DATABASE = MY_DATABASE;
+    renderViews();
 }
 
 // --- Lógica Principal ---
@@ -537,5 +541,7 @@ function reorderMapBasedOnDOM() {
 loadDatabase();
 
 </script>
+
+<script src="database.js"></script>
 </body>
 </html>
