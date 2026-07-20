@@ -8,7 +8,7 @@ const MY_DATABASE = {
                     {
                         "name": "Economía Y Empresa",
                         "sort_name": "EE",
-                        "type": "OBLIGATORIA", 
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -666,19 +666,19 @@ const MY_DATABASE = {
                         "horario": {
                             "lunes": [],
                             "martes": [{
-                                    "start": "11:30",
-                                    "halfHourSlots": 3,
-                                    "lines": [
-                                        "LAB 1"
-                                    ]
-                                },
-                                {
-                                    "start": "13:00",
-                                    "halfHourSlots": 3,
-                                    "lines": [
-                                        "LAB 2"
-                                    ]
-                                }],
+                                "start": "11:30",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB 1"
+                                ]
+                            },
+                            {
+                                "start": "13:00",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB 2"
+                                ]
+                            }],
                             "miercoles": [
                                 {
                                     "start": "8:30",
@@ -757,19 +757,19 @@ const MY_DATABASE = {
                                 }
                             ],
                             "miercoles": [{
-                                    "start": "11:30",
-                                    "halfHourSlots": 3,
-                                    "lines": [
-                                        "LAB L3"
-                                    ]
-                                },
-                                {
-                                    "start": "13:00",
-                                    "halfHourSlots": 3,
-                                    "lines": [
-                                        "LAB L4"
-                                    ]
-                                }],
+                                "start": "11:30",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB L3"
+                                ]
+                            },
+                            {
+                                "start": "13:00",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB L4"
+                                ]
+                            }],
                             "jueves": [
                                 {
                                     "start": "8:30",
@@ -847,7 +847,7 @@ const MY_DATABASE = {
                             ]
                         }
                     },
-                    
+
                 ]
             },
             {
@@ -948,6 +948,61 @@ const MY_DATABASE = {
                         }
                     },
                     {
+                        "name": "Programación de Bases de Datos",
+                        "sort_name": "PBD",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NOVELL",
+                                        "lab-1"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-2"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-3"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NOVELL",
+                                        "lab-4"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
                         "name": "Imagen Digital",
                         "sort_name": "ID",
                         "type": "OPTATIVA",
@@ -984,7 +1039,123 @@ const MY_DATABASE = {
                             "jueves": [],
                             "viernes": []
                         }
-                    }
+                    },
+                    {
+    "name": "Administración de Redes y Servicios",
+    "sort_name": "ARS",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [],
+      "martes": [],
+      "miercoles": [],
+      "jueves": [],
+      "viernes": [
+        {
+          "start": "8:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala REPRO",
+            "lab-1"
+          ]
+        },
+        {
+          "start": "10:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala REPRO",
+            "--- COMÚN ---"
+          ]
+        },
+        {
+          "start": "12:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala REPRO",
+            "lab-2"
+          ]
+        },
+        
+      ]
+    }
+  },
+  {
+    "name": "Arquitecturas Orientadas a Servicios",
+    "sort_name": "AOS",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [
+        {
+          "start": "11:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "aula I-1",
+            "lab-2"
+          ]
+        },
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala NORBA",
+            "lab-1"
+          ]
+        }
+      ],
+      "martes": [
+      ],
+      "miercoles": [],
+      "jueves": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala SALA-1",
+            "--- COMÚN ---"
+          ]
+        }
+      ],
+      "viernes": []
+    }
+  },
+  {
+    "name": "Seguridad en Redes Telemáticas",
+    "sort_name": "SRT",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [
+        {
+          "start": "9:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala SUN",
+            "lab-1"
+          ]
+        },
+        {
+          "start": "11:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala SUN",
+            "lab-2"
+          ]
+        }
+      ],
+      "martes": [],
+      "miercoles": [
+        {
+          "start": "11:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "aula I-1",
+            "--- COMÚN ---"
+          ]
+        }
+      ],
+      "jueves": [],
+      "viernes": []
+    }
+  }
+                    
                 ]
             }
         ],
@@ -1549,8 +1720,8 @@ const MY_DATABASE = {
                                     ]
                                 }
                             ]
+                        }
                     }
-}
                 ]
             }
 
