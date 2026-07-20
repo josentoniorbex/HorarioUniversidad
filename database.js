@@ -1681,6 +1681,278 @@ const MY_DATABASE = {
                 "number_curso": 3,
                 "subjects": [
                     {
+                        "name": "Diseño y interacción de sistemas de información",
+                        "sort_name": "DISI",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L3|5*"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L4|6*"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Sistemas Operativos",
+                        "sort_name": "SO",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg IS"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg IC"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg* IC"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg* IS"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L6"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Auditoría y Legislación Informáticas",
+                        "sort_name": "ALI",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [{
+                                "start": "11:30",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB 1"
+                                ]
+                            },
+                            {
+                                "start": "13:00",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB 2"
+                                ]
+                            }],
+                            "miercoles": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 4"
+                                    ]
+                                }],
+                            "jueves": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 5"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 6"
+                                    ]
+                                }],
+                            "viernes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Ingeniería del Software",
+                        "sort_name": "IS",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "gg"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L2"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [{
+                                "start": "11:30",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB L3"
+                                ]
+                            },
+                            {
+                                "start": "13:00",
+                                "halfHourSlots": 3,
+                                "lines": [
+                                    "LAB L4"
+                                ]
+                            }],
+                            "jueves": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L5"
+                                    ]
+                                },
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
                         "name": "Redes de Ordenadores",
                         "sort_name": "RO",
                         "type": "OBLIGATORIA",
