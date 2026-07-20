@@ -8,6 +8,7 @@ const MY_DATABASE = {
                     {
                         "name": "Economía Y Empresa",
                         "sort_name": "EE",
+                        "type": "OBLIGATORIA", 
                         "horario": {
                             "lunes": [
                                 {
@@ -78,6 +79,7 @@ const MY_DATABASE = {
                     {
                         "name": "Desarrollo de Programas",
                         "sort_name": "DP",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -178,6 +180,7 @@ const MY_DATABASE = {
                     {
                         "name": "Bases de Datos",
                         "sort_name": "BD",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -290,6 +293,7 @@ const MY_DATABASE = {
                     {
                         "name": "Análisis y Diseño de Algoritmos",
                         "sort_name": "ADA",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [
@@ -403,6 +407,7 @@ const MY_DATABASE = {
                     {
                         "name": "Administración y Organización de Computadores",
                         "sort_name": "AOC",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -515,6 +520,7 @@ const MY_DATABASE = {
                     {
                         "name": "Diseño y interacción de sistemas de información",
                         "sort_name": "DISI",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [],
@@ -570,6 +576,7 @@ const MY_DATABASE = {
                     {
                         "name": "Sistemas Operativos",
                         "sort_name": "SO",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -655,6 +662,7 @@ const MY_DATABASE = {
                     {
                         "name": "Auditoría y Legislación Informáticas",
                         "sort_name": "ALI",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [{
@@ -722,6 +730,7 @@ const MY_DATABASE = {
                     {
                         "name": "Ingeniería del Software",
                         "sort_name": "IS",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [
@@ -783,6 +792,7 @@ const MY_DATABASE = {
                     {
                         "name": "Diseño y Admon. Bases de Datos",
                         "sort_name": "DABD",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [
@@ -847,6 +857,7 @@ const MY_DATABASE = {
                     {
                         "name": "Arquitecturas Software para entornos empresariales",
                         "sort_name": "ASEE",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -893,6 +904,7 @@ const MY_DATABASE = {
                     {
                         "name": "Gestión de proyectos software",
                         "sort_name": "GPS",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [
@@ -938,6 +950,7 @@ const MY_DATABASE = {
                     {
                         "name": "Imagen Digital",
                         "sort_name": "ID",
+                        "type": "OPTATIVA",
                         "horario": {
                             "lunes": [
                                 {
@@ -986,6 +999,7 @@ const MY_DATABASE = {
                     {
                         "name": "Economía Y Empresa",
                         "sort_name": "EE",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -1056,6 +1070,7 @@ const MY_DATABASE = {
                     {
                         "name": "Desarrollo de Programas",
                         "sort_name": "DP",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -1156,6 +1171,7 @@ const MY_DATABASE = {
                     {
                         "name": "Bases de Datos",
                         "sort_name": "BD",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -1268,6 +1284,7 @@ const MY_DATABASE = {
                     {
                         "name": "Análisis y Diseño de Algoritmos",
                         "sort_name": "ADA",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
                             "martes": [
@@ -1381,6 +1398,7 @@ const MY_DATABASE = {
                     {
                         "name": "Administración y Organización de Computadores",
                         "sort_name": "AOC",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
@@ -1494,6 +1512,7 @@ const MY_DATABASE = {
                     {
                         "name": "Redes de Ordenadores",
                         "sort_name": "RO",
+                        "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [
                                 {
