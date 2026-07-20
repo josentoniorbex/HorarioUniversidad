@@ -400,7 +400,7 @@ const MY_DATABASE = {
                                     "lines": [
                                         "lab* L10"
                                     ]
-                                },
+                                }
                             ]
                         }
                     },
@@ -506,7 +506,7 @@ const MY_DATABASE = {
                                     "lines": [
                                         "lab L7"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -784,7 +784,7 @@ const MY_DATABASE = {
                                     "lines": [
                                         "LAB L5"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -843,10 +843,10 @@ const MY_DATABASE = {
                                     "lines": [
                                         "gg"
                                     ]
-                                },
+                                }
                             ]
                         }
-                    },
+                    }
 
                 ]
             },
@@ -1073,7 +1073,7 @@ const MY_DATABASE = {
             "sala REPRO",
             "lab-2"
           ]
-        },
+        }
         
       ]
     }
@@ -1562,7 +1562,7 @@ const MY_DATABASE = {
                                     "lines": [
                                         "lab* L10"
                                     ]
-                                },
+                                }
                             ]
                         }
                     },
@@ -1668,7 +1668,7 @@ const MY_DATABASE = {
                                     "lines": [
                                         "lab L7"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -1947,7 +1947,7 @@ const MY_DATABASE = {
                                     "lines": [
                                         "LAB L5"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
