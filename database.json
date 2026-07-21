@@ -400,7 +400,7 @@
                                     "lines": [
                                         "lab* L10"
                                     ]
-                                },
+                                }
                             ]
                         }
                     },
@@ -506,7 +506,7 @@
                                     "lines": [
                                         "lab L7"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -784,7 +784,7 @@
                                     "lines": [
                                         "LAB L5"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -843,10 +843,10 @@
                                     "lines": [
                                         "gg"
                                     ]
-                                },
+                                }
                             ]
                         }
-                    },
+                    }
 
                 ]
             },
@@ -1073,7 +1073,7 @@
             "sala REPRO",
             "lab-2"
           ]
-        },
+        }
         
       ]
     }
@@ -1562,7 +1562,7 @@
                                     "lines": [
                                         "lab* L10"
                                     ]
-                                },
+                                }
                             ]
                         }
                     },
@@ -1668,7 +1668,7 @@
                                     "lines": [
                                         "lab L7"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -1947,7 +1947,7 @@
                                     "lines": [
                                         "LAB L5"
                                     ]
-                                },
+                                }
                             ],
                             "viernes": []
                         }
@@ -1994,6 +1994,242 @@
                             ]
                         }
                     }
+                ]
+            },
+            {
+                "name_curso": "cuarto curso",
+                "number_curso": 4,
+                "subjects": [
+                    {
+    "name": "Arquitecturas Especializadas",
+    "sort_name": "ARQ ESP",
+    "type": "OBLIGATORIA",
+    "horario": {
+      "lunes": [
+        {
+          "start": "17:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "aula I-5 / lab SD+BETA"
+          ]
+        },
+        {
+          "start": "19:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "SD+BETA",
+            "grp-2"
+          ]
+        }
+      ],
+      "martes": [
+        {
+          "start": "17:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SD+BETA",
+            "grp-1"
+          ]
+        }
+      ],
+      "miercoles": [],
+      "jueves": [],
+      "viernes": []
+    }
+  },
+  {
+    "name": "Robótica",
+    "sort_name": "Rob",
+    "type": "OBLIGATORIA",
+    "horario": {
+      "lunes": [],
+      "martes": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "aula I-5 / lab SD+BETA"
+          ]
+        }
+      ],
+      "miercoles": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SD+BETA",
+            "grp-1"
+          ]
+        },
+        {
+          "start": "17:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SD+BETA",
+            "grp-2"
+          ]
+        }
+      ],
+      "jueves": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SD+BETA",
+            "grp-3"
+          ]
+        }
+      ],
+      "viernes": []
+    }
+  },
+  {
+    "name": "Sistemas en Tiempo Real",
+    "sort_name": "S.T Real",
+    "type": "OBLIGATORIA",
+    "horario": {
+      "lunes": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "aula I-5"
+          ]
+        }
+      ],
+      "martes": [],
+      "miercoles": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala LAB-1",
+            "grp-2"
+          ]
+        },
+        {
+          "start": "17:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala LAB-1",
+            "grp-1"
+          ]
+        }
+      ],
+      "jueves": [],
+      "viernes": []
+    }
+  },
+  {
+    "name": "Arquitecturas Web",
+    "sort_name": "ARQ WEB",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [],
+      "martes": [],
+      "miercoles": [],
+      "jueves": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala LAB-1"
+          ]
+        },
+        {
+          "start": "17:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala LAB-1"
+          ]
+        }
+      ],
+      "viernes": []
+    }
+  },
+  {
+    "name": "Computación Bio-Inspirada",
+    "sort_name": "COMP BIOINSP",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [],
+      "martes": [],
+      "miercoles": [
+        {
+          "start": "19:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SD+BETA"
+          ]
+        }
+      ],
+      "jueves": [
+        {
+          "start": "19:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SD+BETA"
+          ]
+        }
+      ],
+      "viernes": []
+    }
+  },
+  {
+    "name": "Dispositivos Ubicuos",
+    "sort_name": "DISP UBICUOS",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [],
+      "martes": [],
+      "miercoles": [],
+      "jueves": [],
+      "viernes": [
+        {
+          "start": "15:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala LAB-1"
+          ]
+        },
+        {
+          "start": "17:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "sala LAB-1"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Procesamiento Gráfico",
+    "sort_name": "PROC GRÁFICO",
+    "type": "OPTATIVA",
+    "horario": {
+      "lunes": [
+        {
+          "start": "19:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "aula I-5"
+          ]
+        }
+      ],
+      "martes": [
+        {
+          "start": "19:30",
+          "halfHourSlots": 4,
+          "lines": [
+            "lab SALA-1"
+          ]
+        }
+      ],
+      "miercoles": [],
+      "jueves": [],
+      "viernes": []
+    }
+  }
                 ]
             }
 
