@@ -1041,125 +1041,651 @@
                         }
                     },
                     {
-    "name": "Administración de Redes y Servicios",
-    "sort_name": "ARS",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [],
-      "martes": [],
-      "miercoles": [],
-      "jueves": [],
-      "viernes": [
-        {
-          "start": "8:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala REPRO",
-            "lab-1"
-          ]
-        },
-        {
-          "start": "10:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala REPRO",
-            "--- COMÚN ---"
-          ]
-        },
-        {
-          "start": "12:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala REPRO",
-            "lab-2"
-          ]
-        }
-        
-      ]
-    }
-  },
-  {
-    "name": "Arquitecturas Orientadas a Servicios",
-    "sort_name": "AOS",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [
-        {
-          "start": "11:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "aula I-1",
-            "lab-2"
-          ]
-        },
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala NORBA",
-            "lab-1"
-          ]
-        }
-      ],
-      "martes": [
-      ],
-      "miercoles": [],
-      "jueves": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala SALA-1",
-            "--- COMÚN ---"
-          ]
-        }
-      ],
-      "viernes": []
-    }
-  },
-  {
-    "name": "Seguridad en Redes Telemáticas",
-    "sort_name": "SRT",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [
-        {
-          "start": "9:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala SUN",
-            "lab-1"
-          ]
-        },
-        {
-          "start": "11:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala SUN",
-            "lab-2"
-          ]
-        }
-      ],
-      "martes": [],
-      "miercoles": [
-        {
-          "start": "11:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "aula I-1",
-            "--- COMÚN ---"
-          ]
-        }
-      ],
-      "jueves": [],
-      "viernes": []
-    }
-  }
-                    
+                        "name": "Administración de Redes y Servicios",
+                        "sort_name": "ARS",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [],
+                            "miercoles": [],
+                            "jueves": [],
+                            "viernes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala REPRO",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala REPRO",
+                                        "--- COMÚN ---"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala REPRO",
+                                        "lab-2"
+                                    ]
+                                }
+
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Arquitecturas Orientadas a Servicios",
+                        "sort_name": "AOS",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "lab-2"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-1"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                            ],
+                            "miercoles": [],
+                            "jueves": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala SALA-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Seguridad en Redes Telemáticas",
+                        "sort_name": "SRT",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala SUN",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala SUN",
+                                        "lab-2"
+                                    ]
+                                }
+                            ],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    }
+
                 ]
             }
         ],
-        "segundo_semestre": []
+        "segundo_semestre": [
+            {
+                "name_curso": "tercer curso",
+                "number_curso": 3,
+                "subjects": [
+                    {
+                        "name": "Arquitectura de Redes y Protocolos",
+                        "sort_name": "ARP",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Diseño y Modelado de Sistemas Software",
+                        "sort_name": "DMSS",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab** L3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab* L4"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Ingeniería de Requisitos",
+                        "sort_name": "IR",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                }
+
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Programación en Internet",
+                        "sort_name": "PI",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L1"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab* L3"
+                                    ]
+                                },
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab L5"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Teoría de Lenguajes",
+                        "sort_name": "TL",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L2"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "lab L4"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    }
+                ]
+            },
+            {
+                "name_curso": "cuarto curso",
+                "number_curso": 4,
+                "subjects": [
+                    {
+                        "name": "Minería de Datos y Almacenamiento de Datos",
+                        "sort_name": "MDAD",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-2"
+                                    ]
+                                }
+                            ],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                        {
+                            "name": "Ingeniería Web",
+                            "sort_name": "ING WEB",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [],
+                                "martes": [
+                                    {
+                                        "start": "18:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "miercoles": [],
+                                "jueves": [],
+                                "viernes": [
+                                    {
+                                        "start": "16:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "18:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Procesamiento de la Información Multimedia",
+                            "sort_name": "PIM",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [],
+                                "martes": [
+                                    {
+                                        "start": "16:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "miercoles": [],
+                                "jueves": [
+                                    {
+                                        "start": "16:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "SALA-1",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "18:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "SALA-1",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ],
+                                "viernes": []
+                            }
+                        },
+                        {
+                            "name": "Recuperación de la Información y Búsqueda en la Web",
+                            "sort_name": "RIBW",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [
+                                    {
+                                        "start": "15:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "aula I-1",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "martes": [],
+                                "miercoles": [
+                                    {
+                                        "start": "17:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "19:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ],
+                                "jueves": [],
+                                "viernes": []
+                            }
+                        },
+                        {
+                            "name": "Redes de Comunicaciones Móviles y Multimedia",
+                            "sort_name": "RCMM",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [
+                                    {
+                                        "start": "10:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "aula I-1",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "martes": [
+                                    {
+                                        "start": "9:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "LABORATORIO-1",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "11:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "LABORATORIO-1",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ],
+                                "miercoles": [],
+                                "jueves": [],
+                                "viernes": []
+                            }
+                        }
+                ]
+            }
+        ]
     },
     "ingenieria_computadores": {
         "primer_semestre": [
@@ -2001,235 +2527,235 @@
                 "number_curso": 4,
                 "subjects": [
                     {
-    "name": "Arquitecturas Especializadas",
-    "sort_name": "ARQ ESP",
-    "type": "OBLIGATORIA",
-    "horario": {
-      "lunes": [
-        {
-          "start": "17:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "aula I-5 / lab SD+BETA"
-          ]
-        },
-        {
-          "start": "19:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "SD+BETA",
-            "grp-2"
-          ]
-        }
-      ],
-      "martes": [
-        {
-          "start": "17:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SD+BETA",
-            "grp-1"
-          ]
-        }
-      ],
-      "miercoles": [],
-      "jueves": [],
-      "viernes": []
-    }
-  },
-  {
-    "name": "Robótica",
-    "sort_name": "Rob",
-    "type": "OBLIGATORIA",
-    "horario": {
-      "lunes": [],
-      "martes": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "aula I-5 / lab SD+BETA"
-          ]
-        }
-      ],
-      "miercoles": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SD+BETA",
-            "grp-1"
-          ]
-        },
-        {
-          "start": "17:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SD+BETA",
-            "grp-2"
-          ]
-        }
-      ],
-      "jueves": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SD+BETA",
-            "grp-3"
-          ]
-        }
-      ],
-      "viernes": []
-    }
-  },
-  {
-    "name": "Sistemas en Tiempo Real",
-    "sort_name": "S.T Real",
-    "type": "OBLIGATORIA",
-    "horario": {
-      "lunes": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "aula I-5"
-          ]
-        }
-      ],
-      "martes": [],
-      "miercoles": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala LAB-1",
-            "grp-2"
-          ]
-        },
-        {
-          "start": "17:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala LAB-1",
-            "grp-1"
-          ]
-        }
-      ],
-      "jueves": [],
-      "viernes": []
-    }
-  },
-  {
-    "name": "Arquitecturas Web",
-    "sort_name": "ARQ WEB",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [],
-      "martes": [],
-      "miercoles": [],
-      "jueves": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala LAB-1"
-          ]
-        },
-        {
-          "start": "17:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala LAB-1"
-          ]
-        }
-      ],
-      "viernes": []
-    }
-  },
-  {
-    "name": "Computación Bio-Inspirada",
-    "sort_name": "COMP BIOINSP",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [],
-      "martes": [],
-      "miercoles": [
-        {
-          "start": "19:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SD+BETA"
-          ]
-        }
-      ],
-      "jueves": [
-        {
-          "start": "19:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SD+BETA"
-          ]
-        }
-      ],
-      "viernes": []
-    }
-  },
-  {
-    "name": "Dispositivos Ubicuos",
-    "sort_name": "DISP UBICUOS",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [],
-      "martes": [],
-      "miercoles": [],
-      "jueves": [],
-      "viernes": [
-        {
-          "start": "15:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala LAB-1"
-          ]
-        },
-        {
-          "start": "17:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "sala LAB-1"
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "name": "Procesamiento Gráfico",
-    "sort_name": "PROC GRÁFICO",
-    "type": "OPTATIVA",
-    "horario": {
-      "lunes": [
-        {
-          "start": "19:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "aula I-5"
-          ]
-        }
-      ],
-      "martes": [
-        {
-          "start": "19:30",
-          "halfHourSlots": 4,
-          "lines": [
-            "lab SALA-1"
-          ]
-        }
-      ],
-      "miercoles": [],
-      "jueves": [],
-      "viernes": []
-    }
-  }
+                        "name": "Arquitecturas Especializadas",
+                        "sort_name": "ARQ ESP",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-5 / lab SD+BETA"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "SD+BETA",
+                                        "grp-2"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SD+BETA",
+                                        "grp-1"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Robótica",
+                        "sort_name": "Rob",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-5 / lab SD+BETA"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SD+BETA",
+                                        "grp-1"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SD+BETA",
+                                        "grp-2"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SD+BETA",
+                                        "grp-3"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Sistemas en Tiempo Real",
+                        "sort_name": "S.T Real",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-5"
+                                    ]
+                                }
+                            ],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala LAB-1",
+                                        "grp-2"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala LAB-1",
+                                        "grp-1"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Arquitecturas Web",
+                        "sort_name": "ARQ WEB",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [],
+                            "miercoles": [],
+                            "jueves": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala LAB-1"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala LAB-1"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Computación Bio-Inspirada",
+                        "sort_name": "COMP BIOINSP",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SD+BETA"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SD+BETA"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Dispositivos Ubicuos",
+                        "sort_name": "DISP UBICUOS",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [],
+                            "miercoles": [],
+                            "jueves": [],
+                            "viernes": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala LAB-1"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala LAB-1"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Procesamiento Gráfico",
+                        "sort_name": "PROC GRÁFICO",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-5"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "lab SALA-1"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    }
                 ]
             }
 

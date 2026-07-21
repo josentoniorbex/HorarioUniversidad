@@ -1493,12 +1493,137 @@ const MY_DATABASE = {
                 "name_curso": "cuarto curso",
                 "number_curso": 4,
                 "subjects": [
+                    {
+                        "name": "Minería de Datos y Almacenamiento de Datos",
+                        "sort_name": "MDAD",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-2"
+                                    ]
+                                }
+                            ],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
                         {
-                            "name": "Minería de Datos y Almacenamiento de Datos",
-                            "sort_name": "MDAD",
+                            "name": "Ingeniería Web",
+                            "sort_name": "ING WEB",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [],
+                                "martes": [
+                                    {
+                                        "start": "18:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "miercoles": [],
+                                "jueves": [],
+                                "viernes": [
+                                    {
+                                        "start": "16:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "18:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Procesamiento de la Información Multimedia",
+                            "sort_name": "PIM",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [],
+                                "martes": [
+                                    {
+                                        "start": "16:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "sala NORBA",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "miercoles": [],
+                                "jueves": [
+                                    {
+                                        "start": "16:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "SALA-1",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "18:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "SALA-1",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ],
+                                "viernes": []
+                            }
+                        },
+                        {
+                            "name": "Recuperación de la Información y Búsqueda en la Web",
+                            "sort_name": "RIBW",
                             "type": "OPTATIVA",
                             "horario": {
                                 "lunes": [
+                                    {
+                                        "start": "15:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "aula I-1",
+                                            "--- COMÚN ---"
+                                        ]
+                                    }
+                                ],
+                                "martes": [],
+                                "miercoles": [
                                     {
                                         "start": "17:30",
                                         "halfHourSlots": 4,
@@ -1516,10 +1641,18 @@ const MY_DATABASE = {
                                         ]
                                     }
                                 ],
-                                "martes": [],
-                                "miercoles": [
+                                "jueves": [],
+                                "viernes": []
+                            }
+                        },
+                        {
+                            "name": "Redes de Comunicaciones Móviles y Multimedia",
+                            "sort_name": "RCMM",
+                            "type": "OPTATIVA",
+                            "horario": {
+                                "lunes": [
                                     {
-                                        "start": "15:30",
+                                        "start": "10:30",
                                         "halfHourSlots": 4,
                                         "lines": [
                                             "aula I-1",
@@ -1527,11 +1660,30 @@ const MY_DATABASE = {
                                         ]
                                     }
                                 ],
+                                "martes": [
+                                    {
+                                        "start": "9:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "LABORATORIO-1",
+                                            "lab-1"
+                                        ]
+                                    },
+                                    {
+                                        "start": "11:30",
+                                        "halfHourSlots": 4,
+                                        "lines": [
+                                            "LABORATORIO-1",
+                                            "lab-2"
+                                        ]
+                                    }
+                                ],
+                                "miercoles": [],
                                 "jueves": [],
                                 "viernes": []
                             }
                         }
-                    ]
+                ]
             }
         ]
     },
