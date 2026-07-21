@@ -665,20 +665,22 @@
                         "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
-                            "martes": [{
-                                "start": "11:30",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB 1"
-                                ]
-                            },
-                            {
-                                "start": "13:00",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB 2"
-                                ]
-                            }],
+                            "martes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 2"
+                                    ]
+                                }
+                            ],
                             "miercoles": [
                                 {
                                     "start": "8:30",
@@ -700,7 +702,8 @@
                                     "lines": [
                                         "LAB 4"
                                     ]
-                                }],
+                                }
+                            ],
                             "jueves": [
                                 {
                                     "start": "11:30",
@@ -715,7 +718,8 @@
                                     "lines": [
                                         "LAB 6"
                                     ]
-                                }],
+                                }
+                            ],
                             "viernes": [
                                 {
                                     "start": "8:30",
@@ -756,20 +760,22 @@
                                     ]
                                 }
                             ],
-                            "miercoles": [{
-                                "start": "11:30",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB L3"
-                                ]
-                            },
-                            {
-                                "start": "13:00",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB L4"
-                                ]
-                            }],
+                            "miercoles": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L4"
+                                    ]
+                                }
+                            ],
                             "jueves": [
                                 {
                                     "start": "8:30",
@@ -847,7 +853,6 @@
                             ]
                         }
                     }
-
                 ]
             },
             {
@@ -1074,7 +1079,6 @@
                                         "lab-2"
                                     ]
                                 }
-
                             ]
                         }
                     },
@@ -1101,8 +1105,7 @@
                                     ]
                                 }
                             ],
-                            "martes": [
-                            ],
+                            "martes": [],
                             "miercoles": [],
                             "jueves": [
                                 {
@@ -1155,11 +1158,545 @@
                             "viernes": []
                         }
                     }
-
                 ]
             }
         ],
         "segundo_semestre": [
+            {
+                "name_curso": "segundo curso",
+                "number_curso": 2,
+                "subjects": [
+                    {
+                        "name": "Gestión de las Organizaciones",
+                        "sort_name": "GO",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "20:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Sem A"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "20:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Sem B"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Fundamentos de Redes y Comunicaciones",
+                        "sort_name": "FRC",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 1"
+                                    ]
+                                },
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 2"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 3"
+                                    ]
+                                },
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 4"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 5"
+                                    ]
+                                },
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 6"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 7"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 8"
+                                    ]
+                                },
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 9"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 10"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Programación Concurrente y Distribuida",
+                        "sort_name": "PCD",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 1"
+                                    ]
+                                },
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 2"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 3"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 4"
+                                    ]
+                                },
+                                {
+                                    "start": "10:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 5"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 6"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 7"
+                                    ]
+                                },
+                                {
+                                    "start": "18:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab 8"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Inteligencia Artificial y Sistemas Inteligentes",
+                        "sort_name": "IASI",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "11:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab L2"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab L4"
+                                    ]
+                                },
+                                {
+                                    "start": "11:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "Lab L6"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Estructura de Computadores",
+                        "sort_name": "EC",
+                        "type": "OBLIGATORIA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L1"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L2"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L3"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L4"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                }
+                            ],
+                            "jueves": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L5"
+                                    ]
+                                },
+                                {
+                                    "start": "12:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L6"
+                                    ]
+                                },
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG A"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 2,
+                                    "lines": [
+                                        "GG B"
+                                    ]
+                                }
+                            ],
+                            "viernes": [
+                                {
+                                    "start": "8:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L7"
+                                    ]
+                                },
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "Lab L8"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
             {
                 "name_curso": "tercer curso",
                 "number_curso": 3,
@@ -1185,8 +1722,7 @@
                                     ]
                                 }
                             ],
-                            "martes": [
-                            ],
+                            "martes": [],
                             "miercoles": [
                                 {
                                     "start": "10:30",
@@ -1344,7 +1880,6 @@
                                         "lab L4"
                                     ]
                                 }
-
                             ],
                             "miercoles": [
                                 {
@@ -1531,158 +2066,158 @@
                             "viernes": []
                         }
                     },
-                        {
-                            "name": "Ingeniería Web",
-                            "sort_name": "ING WEB",
-                            "type": "OPTATIVA",
-                            "horario": {
-                                "lunes": [],
-                                "martes": [
-                                    {
-                                        "start": "18:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "sala NORBA",
-                                            "--- COMÚN ---"
-                                        ]
-                                    }
-                                ],
-                                "miercoles": [],
-                                "jueves": [],
-                                "viernes": [
-                                    {
-                                        "start": "16:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "sala NORBA",
-                                            "lab-1"
-                                        ]
-                                    },
-                                    {
-                                        "start": "18:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "sala NORBA",
-                                            "lab-2"
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            "name": "Procesamiento de la Información Multimedia",
-                            "sort_name": "PIM",
-                            "type": "OPTATIVA",
-                            "horario": {
-                                "lunes": [],
-                                "martes": [
-                                    {
-                                        "start": "16:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "sala NORBA",
-                                            "--- COMÚN ---"
-                                        ]
-                                    }
-                                ],
-                                "miercoles": [],
-                                "jueves": [
-                                    {
-                                        "start": "16:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "SALA-1",
-                                            "lab-1"
-                                        ]
-                                    },
-                                    {
-                                        "start": "18:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "SALA-1",
-                                            "lab-2"
-                                        ]
-                                    }
-                                ],
-                                "viernes": []
-                            }
-                        },
-                        {
-                            "name": "Recuperación de la Información y Búsqueda en la Web",
-                            "sort_name": "RIBW",
-                            "type": "OPTATIVA",
-                            "horario": {
-                                "lunes": [
-                                    {
-                                        "start": "15:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "aula I-1",
-                                            "--- COMÚN ---"
-                                        ]
-                                    }
-                                ],
-                                "martes": [],
-                                "miercoles": [
-                                    {
-                                        "start": "17:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "sala NORBA",
-                                            "lab-1"
-                                        ]
-                                    },
-                                    {
-                                        "start": "19:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "sala NORBA",
-                                            "lab-2"
-                                        ]
-                                    }
-                                ],
-                                "jueves": [],
-                                "viernes": []
-                            }
-                        },
-                        {
-                            "name": "Redes de Comunicaciones Móviles y Multimedia",
-                            "sort_name": "RCMM",
-                            "type": "OPTATIVA",
-                            "horario": {
-                                "lunes": [
-                                    {
-                                        "start": "10:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "aula I-1",
-                                            "--- COMÚN ---"
-                                        ]
-                                    }
-                                ],
-                                "martes": [
-                                    {
-                                        "start": "9:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "LABORATORIO-1",
-                                            "lab-1"
-                                        ]
-                                    },
-                                    {
-                                        "start": "11:30",
-                                        "halfHourSlots": 4,
-                                        "lines": [
-                                            "LABORATORIO-1",
-                                            "lab-2"
-                                        ]
-                                    }
-                                ],
-                                "miercoles": [],
-                                "jueves": [],
-                                "viernes": []
-                            }
+                    {
+                        "name": "Ingeniería Web",
+                        "sort_name": "ING WEB",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [],
+                            "viernes": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-2"
+                                    ]
+                                }
+                            ]
                         }
+                    },
+                    {
+                        "name": "Procesamiento de la Información Multimedia",
+                        "sort_name": "PIM",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [],
+                            "martes": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [
+                                {
+                                    "start": "16:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "SALA-1",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "18:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "SALA-1",
+                                        "lab-2"
+                                    ]
+                                }
+                            ],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Recuperación de la Información y Búsqueda en la Web",
+                        "sort_name": "RIBW",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "15:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "martes": [],
+                            "miercoles": [
+                                {
+                                    "start": "17:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "19:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "sala NORBA",
+                                        "lab-2"
+                                    ]
+                                }
+                            ],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    },
+                    {
+                        "name": "Redes de Comunicaciones Móviles y Multimedia",
+                        "sort_name": "RCMM",
+                        "type": "OPTATIVA",
+                        "horario": {
+                            "lunes": [
+                                {
+                                    "start": "10:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "aula I-1",
+                                        "--- COMÚN ---"
+                                    ]
+                                }
+                            ],
+                            "martes": [
+                                {
+                                    "start": "9:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "LABORATORIO-1",
+                                        "lab-1"
+                                    ]
+                                },
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 4,
+                                    "lines": [
+                                        "LABORATORIO-1",
+                                        "lab-2"
+                                    ]
+                                }
+                            ],
+                            "miercoles": [],
+                            "jueves": [],
+                            "viernes": []
+                        }
+                    }
                 ]
             }
         ]
@@ -2201,7 +2736,6 @@
                     }
                 ]
             },
-
             {
                 "name_curso": "tercer curso",
                 "number_curso": 3,
@@ -2354,20 +2888,22 @@
                         "type": "OBLIGATORIA",
                         "horario": {
                             "lunes": [],
-                            "martes": [{
-                                "start": "11:30",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB 1"
-                                ]
-                            },
-                            {
-                                "start": "13:00",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB 2"
-                                ]
-                            }],
+                            "martes": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 1"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB 2"
+                                    ]
+                                }
+                            ],
                             "miercoles": [
                                 {
                                     "start": "8:30",
@@ -2389,7 +2925,8 @@
                                     "lines": [
                                         "LAB 4"
                                     ]
-                                }],
+                                }
+                            ],
                             "jueves": [
                                 {
                                     "start": "11:30",
@@ -2404,7 +2941,8 @@
                                     "lines": [
                                         "LAB 6"
                                     ]
-                                }],
+                                }
+                            ],
                             "viernes": [
                                 {
                                     "start": "8:30",
@@ -2445,20 +2983,22 @@
                                     ]
                                 }
                             ],
-                            "miercoles": [{
-                                "start": "11:30",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB L3"
-                                ]
-                            },
-                            {
-                                "start": "13:00",
-                                "halfHourSlots": 3,
-                                "lines": [
-                                    "LAB L4"
-                                ]
-                            }],
+                            "miercoles": [
+                                {
+                                    "start": "11:30",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L3"
+                                    ]
+                                },
+                                {
+                                    "start": "13:00",
+                                    "halfHourSlots": 3,
+                                    "lines": [
+                                        "LAB L4"
+                                    ]
+                                }
+                            ],
                             "jueves": [
                                 {
                                     "start": "8:30",
@@ -2758,7 +3298,6 @@
                     }
                 ]
             }
-
         ],
         "segundo_semestre": []
     }
